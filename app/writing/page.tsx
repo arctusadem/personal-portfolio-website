@@ -7,6 +7,7 @@ import { articles, siteContent, socialPosts } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 
 const easterEggArticle = articles[0];
+const linkedinPostsUrl = "https://www.linkedin.com/in/bruno-cesar-rocha-salgado/recent-activity/all/";
 
 export const metadata = buildMetadata({
   title: "Posts",
@@ -35,7 +36,7 @@ export default function WritingPage() {
                   <p>
                     Bruno's shorter professional updates continue on LinkedIn, with selected posts surfaced here when they are curated into the site content.
                   </p>
-                  <ButtonLink external href={siteContent.profile.linkedinUrl} variant="secondary" withIcon={false}>
+                  <ButtonLink external href={linkedinPostsUrl} variant="secondary" withIcon={false}>
                     <Linkedin className="size-4" /> View more on LinkedIn
                   </ButtonLink>
                 </div>
@@ -73,7 +74,7 @@ export default function WritingPage() {
                       For now, the full short-form activity stream continues on LinkedIn.
                     </p>
                   </div>
-                  <ButtonLink external href={siteContent.profile.linkedinUrl} variant="secondary" withIcon={false}>
+                  <ButtonLink external href={linkedinPostsUrl} variant="secondary" withIcon={false}>
                     <Linkedin className="size-4" /> View more on LinkedIn
                   </ButtonLink>
                 </div>
