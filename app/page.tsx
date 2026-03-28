@@ -7,7 +7,7 @@ import { featuredArticles, featuredProjects, siteContent } from "@/lib/content";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Bruno Salgado",
+  title: "Tech Lead / Senior Backend Engineer",
   description:
     "Software Engineering Tech Lead and Senior Backend Engineer with nearly 8 years of experience across banking, payments, AWS modernization, and distributed backend systems.",
   path: "/",
@@ -297,6 +297,7 @@ export default function HomePage() {
     </>
   );
 }
+
 
 
 
