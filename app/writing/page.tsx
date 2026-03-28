@@ -24,8 +24,8 @@ export default function WritingPage() {
         <Reveal>
           <PageIntro
             eyebrow="Posts"
-            title="Featured LinkedIn posts and one small hidden-features guide."
-            description="Selected short-form posts from Bruno's LinkedIn live here alongside a single post explaining the easter eggs hidden throughout the portfolio."
+            title="Featured LinkedIn posts and one small easter-egg guide."
+            description="A few selected LinkedIn posts sit here alongside one extra post for people who notice the details."
             aside={
               <Surface className="p-6">
                 <div className="space-y-4 text-sm leading-7 text-[var(--muted)]">
@@ -34,7 +34,7 @@ export default function WritingPage() {
                     <p className="font-semibold">LinkedIn first</p>
                   </div>
                   <p>
-                    Bruno's shorter professional updates continue on LinkedIn, with selected posts surfaced here when they are curated into the site content.
+                    Bruno shares shorter professional updates on LinkedIn. This page pulls a small featured set into the portfolio and points back to the full activity feed.
                   </p>
                   <ButtonLink external href={linkedinPostsUrl} variant="secondary" withIcon={false}>
                     <Linkedin className="size-4" /> View more on LinkedIn
@@ -50,7 +50,7 @@ export default function WritingPage() {
             <SectionHeading
               eyebrow="Featured LinkedIn Posts"
               title="Selected posts from Bruno's LinkedIn."
-              description="Curated manually so the site can use a stable local content file rather than depending on LinkedIn's page structure."
+              description="A small featured set from Bruno's activity feed, with a direct path to the full LinkedIn stream."
             />
           </Reveal>
           {socialPosts.length > 0 ? (
@@ -68,10 +68,10 @@ export default function WritingPage() {
                   <div className="space-y-3">
                     <Tag>LinkedIn</Tag>
                     <p className="max-w-3xl text-pretty font-serif text-3xl text-[var(--foreground)] sm:text-4xl">
-                      Featured posts will sit here as curated embeds from Bruno's LinkedIn.
+                      Featured posts will appear here from Bruno's LinkedIn.
                     </p>
                     <p className="max-w-2xl text-sm leading-7 text-[var(--muted)]">
-                      For now, the full short-form activity stream continues on LinkedIn.
+                      The full short-form activity stream continues on LinkedIn.
                     </p>
                   </div>
                   <ButtonLink external href={linkedinPostsUrl} variant="secondary" withIcon={false}>
@@ -101,3 +101,4 @@ export default function WritingPage() {
     </div>
   );
 }
+

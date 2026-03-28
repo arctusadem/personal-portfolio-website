@@ -2,7 +2,6 @@ import type { Route } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowUpRight,
   CalendarDays,
   Linkedin,
   Mail,
@@ -14,6 +13,7 @@ import {
 
 import type { Article, ExperienceItem, Project, SkillCategory, SocialPost } from "@/types/content";
 import { cn } from "@/lib/utils";
+import { LinkedInPostEmbed } from "@/components/sections/linkedin-post-embed";
 import { ButtonLink, Surface, Tag } from "@/components/ui/primitives";
 import { ProjectMockup } from "@/components/sections/project-mockups";
 
@@ -115,27 +115,8 @@ export function SocialPostCard({ post }: { post: SocialPost }) {
           <Tag className="tracking-[0.18em]">0x06</Tag>
         </div>
 
-        <div className="overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-[var(--background)]/70">
-          <iframe
-            src={post.embedUrl}
-            height={post.height}
-            className="w-full"
-            frameBorder="0"
-            allowFullScreen
-            title={post.title}
-          />
-        </div>
+        <LinkedInPostEmbed post={post} />
 
-        <div className="flex justify-end">
-          <a
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--foreground)] transition hover:text-[var(--accent)]"
-            href={post.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open on LinkedIn <ArrowUpRight className="size-4" />
-          </a>
-        </div>
       </div>
     </Surface>
   );
@@ -279,3 +260,4 @@ export function SummaryStrip({
     </div>
   );
 }
+
