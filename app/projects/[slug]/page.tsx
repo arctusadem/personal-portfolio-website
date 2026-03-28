@@ -34,6 +34,17 @@ export async function generateMetadata({
   });
 }
 
+function AnchorPill({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] transition duration-300 hover:border-[var(--accent)] hover:bg-[var(--surface-strong)]"
+      href={href}
+    >
+      {label}
+    </a>
+  );
+}
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -66,7 +77,7 @@ export default async function ProjectDetailPage({
       <StructuredData data={structuredData} />
       <div className="py-16 sm:py-20">
         <Container className="space-y-16">
-          <section className="grid gap-8 xl:grid-cols-[minmax(0,1.08fr)_minmax(21rem,0.92fr)] xl:items-start">
+          <section className="grid gap-8 xl:grid-cols-[minmax(0,1.04fr)_minmax(21rem,0.96fr)] xl:items-start">
             <Reveal className="space-y-6">
               <div className="flex flex-wrap gap-3">
                 <Tag>{project.category}</Tag>
@@ -84,6 +95,12 @@ export default async function ProjectDetailPage({
                 <ButtonLink href="/projects" variant="secondary">
                   Back to projects
                 </ButtonLink>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <AnchorPill href="#architecture" label="View architecture" />
+                <AnchorPill href="#interfaces" label="View interface design" />
+                <AnchorPill href="#operations" label="View operational concerns" />
+                <AnchorPill href="#repo-structure" label="View repository boundaries" />
               </div>
             </Reveal>
 
@@ -107,6 +124,17 @@ export default async function ProjectDetailPage({
                     <p className="text-sm leading-7 text-[var(--muted)]">{project.role}</p>
                     <p className="text-sm leading-7 text-[var(--muted)]">{project.audience}</p>
                   </div>
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">Proof artifacts</p>
+                    <div className="space-y-3">
+                      {project.proofArtifacts.map((artifact) => (
+                        <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)]/70 p-4" key={artifact.title}>
+                          <p className="text-sm font-semibold text-[var(--foreground)]">{artifact.title}</p>
+                          <p className="mt-2 text-sm leading-7 text-[var(--muted)]">{artifact.body}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   <div className="rounded-2xl border border-dashed border-[var(--accent)]/35 bg-[var(--accent-soft)]/35 p-4 text-sm leading-7 text-[var(--muted)]">
                     These projects are portfolio reference implementations created to demonstrate system design, backend depth, and technical judgment. Any dashboards, amounts, or operational figures shown in the UI are illustrative demo data, not employer production metrics.
                   </div>
@@ -122,7 +150,7 @@ export default async function ProjectDetailPage({
             </Reveal>
           </section>
 
-          <section className="grid gap-4 lg:grid-cols-2">
+          <section className="grid gap-4 lg:grid-cols-2" id="overview">
             <Reveal>
               <Surface className="h-full p-6 md:p-8">
                 <div className="space-y-4">
@@ -149,13 +177,30 @@ export default async function ProjectDetailPage({
             </Reveal>
           </section>
 
-          <section className="space-y-8">
+          <section className="space-y-8" id="architecture">
             <Reveal>
               <SectionHeading
                 eyebrow="Architecture"
                 title="Structured to separate core domain responsibility from provider or workflow-specific complexity."
                 description={project.architecture.summary}
               />
+            </Reveal>
+            <Reveal delay={0.04}>
+              <div className="overflow-x-auto pb-2">
+                <div className="flex min-w-max items-center gap-3">
+                  {project.architecture.layers.map((layer, index) => (
+                    <div className="flex items-center gap-3" key={layer.name}>
+                      <div className="w-56 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[0_25px_60px_-40px_var(--shadow-color)]">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--muted)]">Layer {index + 1}</p>
+                        <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">{layer.name}</p>
+                      </div>
+                      {index < project.architecture.layers.length - 1 ? (
+                        <div className="h-px w-10 bg-[var(--border-strong)]" />
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Reveal>
             <Reveal delay={0.05}>
               <Surface className="overflow-hidden p-6 md:p-8">
@@ -186,7 +231,7 @@ export default async function ProjectDetailPage({
               <Reveal delay={0.06}>
                 <Surface className="h-full p-6 md:p-8">
                   <div className="space-y-5">
-                    <Tag>Key decisions</Tag>
+                    <Tag>Technical decisions</Tag>
                     {project.architecture.decisions.map((decision) => (
                       <div className="space-y-2 rounded-3xl border border-[var(--border)] bg-[var(--background)]/70 p-5" key={decision.title}>
                         <h3 className="text-lg font-semibold text-[var(--foreground)]">{decision.title}</h3>
@@ -199,12 +244,58 @@ export default async function ProjectDetailPage({
             </div>
           </section>
 
+          <section className="space-y-8" id="interfaces">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Interface Design"
+                title="API and event boundaries designed to keep complexity inside the right layer."
+                description="These interface choices are part of the proof: they show where the system draws stable contracts, where it tolerates provider variability, and how downstream services stay decoupled."
+              />
+            </Reveal>
+            <div className="grid gap-4 md:grid-cols-3">
+              {project.interfaces.map((item, index) => (
+                <Reveal key={item.title} delay={0.05 * index}>
+                  <Surface className="h-full p-6">
+                    <div className="space-y-3">
+                      <Tag>Boundary</Tag>
+                      <h3 className="text-lg font-semibold text-[var(--foreground)]">{item.title}</h3>
+                      <p className="text-sm leading-7 text-[var(--muted)]">{item.body}</p>
+                    </div>
+                  </Surface>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+
+          <section className="space-y-8" id="operations">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Operational Concerns"
+                title="The case studies also show how the systems would be run, investigated, and recovered."
+                description="Operational maturity is a trust signal on its own, especially for payments and financial systems where support, finance, and engineering all need to understand what happened."
+              />
+            </Reveal>
+            <div className="grid gap-4 md:grid-cols-3">
+              {project.operationalConcerns.map((item, index) => (
+                <Reveal key={item.title} delay={0.05 * index}>
+                  <Surface className="h-full p-6">
+                    <div className="space-y-3">
+                      <Tag>Operations</Tag>
+                      <h3 className="text-lg font-semibold text-[var(--foreground)]">{item.title}</h3>
+                      <p className="text-sm leading-7 text-[var(--muted)]">{item.body}</p>
+                    </div>
+                  </Surface>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+
           <section className="space-y-8">
             <Reveal>
               <SectionHeading
                 eyebrow="Product Surface"
-                title="Features and operational views that make the reference implementation feel credible beyond the API layer."
-                description="The point is to show backend depth alongside the operator-facing surfaces real teams need in order to diagnose and run a system well."
+                title="Features and operator views that make the reference implementation credible beyond the API layer."
+                description="The point is to show backend depth alongside the workflows real teams need in order to diagnose, review, and operate a system well."
               />
             </Reveal>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -284,19 +375,21 @@ export default async function ProjectDetailPage({
               </Surface>
             </Reveal>
             <Reveal delay={0.06}>
-              <Surface className="h-full p-6 md:p-8">
-                <div className="space-y-5">
-                  <Tag>Repository boundaries</Tag>
-                  <ul className="space-y-3 text-sm leading-8 text-[var(--muted)]">
-                    {project.repoStructure.map((item) => (
-                      <li className="flex gap-3 font-mono text-xs sm:text-sm" key={item}>
-                        <span className="mt-2 size-1.5 rounded-full bg-[var(--accent)]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Surface>
+              <div id="repo-structure">
+                <Surface className="h-full p-6 md:p-8">
+                  <div className="space-y-5">
+                    <Tag>Repository boundaries</Tag>
+                    <ul className="space-y-3 text-sm leading-8 text-[var(--muted)]">
+                      {project.repoStructure.map((item) => (
+                        <li className="flex gap-3 font-mono text-xs sm:text-sm" key={item}>
+                          <span className="mt-2 size-1.5 rounded-full bg-[var(--accent)]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Surface>
+              </div>
             </Reveal>
           </section>
         </Container>
@@ -304,3 +397,4 @@ export default async function ProjectDetailPage({
     </>
   );
 }
+

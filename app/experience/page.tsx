@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Experience",
   description:
-    "Career history for Bruno Salgado across Itau Unibanco, PROFIT Business Bank, Cloud Payments, and current Tech Lead work.",
+    "Career history for Bruno Salgado across Itau Unibanco, PROFIT Business Bank, Cloud Payments, and current Tech Lead work in Java, Spring Boot, AWS, and payments environments.",
   path: "/experience",
   keywords: ["Backend engineer experience", "Payments engineer", "Tech lead experience"],
 });
@@ -17,17 +17,17 @@ export const metadata = buildMetadata({
 const operatingModel = [
   {
     title: "Architecture tied to execution",
-    body: "The recurring pattern is not abstract design. It is using architecture to make delivery safer, clearer, and easier to evolve under real deadlines.",
+    body: "The recurring pattern is using architecture to make delivery safer, clearer, and easier to evolve under real deadlines rather than treating design as a separate exercise.",
     icon: "network" as const,
   },
   {
-    title: "Business-aware backend delivery",
-    body: "Financial correctness, migration safety, and operational clarity are treated as core delivery concerns, especially in banking and payments contexts.",
+    title: "Reliability and modernization",
+    body: "Financial correctness, migration safety, provider reliability, and operational visibility stay central whether the work is in banking, payments, or cloud modernization.",
     icon: "shield" as const,
   },
   {
-    title: "Senior communication",
-    body: "The work spans implementation, architecture reviews, stakeholder translation, and helping teams make progress with less ambiguity.",
+    title: "Technical leadership under pressure",
+    body: "The role today spans implementation depth, design review, stakeholder translation, and helping teams move with less ambiguity when the systems are complex.",
     icon: "calendar" as const,
   },
 ];
@@ -39,8 +39,8 @@ export default function ExperiencePage() {
         <Reveal>
           <PageIntro
             eyebrow="Experience"
-            title="Career history across banking, fintech, and current Tech Lead work in Cloud Payments."
-            description="Backend experience shaped by regulated banking, financial reporting, provider-heavy fintech platforms, and the technical leadership required to keep delivery moving in complex environments."
+            title="Career history across banking, fintech, and current Tech Lead work in cloud payments."
+            description="Backend experience shaped by regulated banking, financial reporting, external-provider integrations, AWS modernization, and the technical leadership needed to keep delivery moving in complex environments."
             aside={
               <Surface className="p-6">
                 <div className="space-y-4 text-sm leading-7 text-[var(--muted)]">
@@ -49,7 +49,7 @@ export default function ExperiencePage() {
                     <p className="font-semibold">Career outline</p>
                   </div>
                   <p>
-                    Itau Unibanco to PROFIT Business Bank to Cloud Payments, with the current role focused on technical execution and architecture validation as a Software Engineering Tech Lead.
+                    Itaú Unibanco to PROFIT Business Bank to Cloud Payments, with the current role centered on technical execution, architecture validation, and backend delivery clarity in payments.
                   </p>
                 </div>
               </Surface>
@@ -72,7 +72,7 @@ export default function ExperiencePage() {
             <SectionHeading
               eyebrow="Career Arc"
               title="From regulated banking foundations to fintech platform delivery and Tech Lead responsibility."
-              description="The progression explains why Bruno is comfortable with both implementation depth and the broader delivery decisions that shape backend systems over time."
+              description="The progression explains why Bruno is comfortable with implementation detail, architecture review, modernization work, and the broader delivery decisions that shape backend systems over time."
             />
           </Reveal>
           <Reveal delay={0.06}>
@@ -84,8 +84,8 @@ export default function ExperiencePage() {
           <Reveal>
             <SectionHeading
               eyebrow="How Bruno Operates"
-              title="The value is not only in building services. It is in improving how teams deliver them."
-              description="That includes design quality, rollout safety, platform clarity, and the ability to connect architecture choices back to the delivery realities around them."
+              title="The value is not only in building services. It is in improving how teams deliver and run them."
+              description="That includes clearer ownership boundaries, safer rollouts, more credible architecture decisions, and backend systems that remain explainable when production complexity shows up."
             />
           </Reveal>
           <Reveal delay={0.08}>
@@ -96,3 +96,4 @@ export default function ExperiencePage() {
     </div>
   );
 }
+

@@ -66,7 +66,13 @@ export function ContactForm() {
 
   return (
     <div className="rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[0_25px_60px_-40px_var(--shadow-color)] md:p-8">
-      <form className="space-y-5" onSubmit={handleSubmit}>
+      <div className="space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">Direct email draft</p>
+        <p className="text-sm leading-7 text-[var(--muted)]">
+          A short message about the role, team, or technical challenge is enough. The form opens a pre-filled email draft rather than sending through a third-party service.
+        </p>
+      </div>
+      <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="space-y-2 text-sm font-medium text-[var(--foreground)]">
             Name
@@ -111,13 +117,13 @@ export function ContactForm() {
             name="message"
             value={form.message}
             onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
-            placeholder="A quick note about the role, team, or project context"
+            placeholder="A short note about the role, team, or problem space"
           />
         </label>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-3">
             <button className="inline-flex items-center gap-2 rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-[var(--background)] transition hover:-translate-y-0.5 hover:bg-[var(--foreground-strong)]" type="submit">
-              Start the email <ArrowRight className="size-4" />
+              Open email draft <ArrowRight className="size-4" />
             </button>
             <button
               className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)] hover:bg-[var(--surface-strong)]"
@@ -136,3 +142,4 @@ export function ContactForm() {
     </div>
   );
 }
+

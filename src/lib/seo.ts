@@ -6,6 +6,18 @@ export const siteUrl = new URL(
   process.env.NEXT_PUBLIC_SITE_URL || siteContent.profile.siteUrl,
 );
 
+const sharedKeywords = [
+  "Java",
+  "Spring Boot",
+  "AWS",
+  "Payments",
+  "Fintech",
+  "Distributed Systems",
+  "Senior Backend Engineer",
+  "Tech Lead",
+  siteContent.profile.name,
+];
+
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
 }
@@ -25,11 +37,12 @@ export function buildMetadata({
 }: MetadataInput): Metadata {
   const fullTitle = `${title} | ${siteContent.profile.name}`;
   const url = absoluteUrl(path);
+  const mergedKeywords = Array.from(new Set([...sharedKeywords, ...keywords]));
 
   return {
     title: fullTitle,
     description,
-    keywords,
+    keywords: mergedKeywords,
     alternates: {
       canonical: url,
     },
@@ -57,3 +70,4 @@ export function buildMetadata({
     },
   };
 }
+

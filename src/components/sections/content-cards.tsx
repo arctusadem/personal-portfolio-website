@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   CalendarDays,
+  Github,
   Linkedin,
   Mail,
   MapPin,
@@ -14,8 +15,8 @@ import {
 import type { Article, ExperienceItem, Project, SkillCategory, SocialPost } from "@/types/content";
 import { cn } from "@/lib/utils";
 import { LinkedInPostEmbed } from "@/components/sections/linkedin-post-embed";
-import { ButtonLink, Surface, Tag } from "@/components/ui/primitives";
 import { ProjectMockup } from "@/components/sections/project-mockups";
+import { ButtonLink, Surface, Tag } from "@/components/ui/primitives";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -43,6 +44,15 @@ export function ProjectCard({ project }: { project: Project }) {
               </div>
             ))}
           </div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {project.proofArtifacts.map((artifact) => (
+              <div key={artifact.title} className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--muted)]">Proof artifact</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--foreground)]">{artifact.title}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{artifact.body}</p>
+              </div>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-2">
             {project.stack.map((item) => (
               <Tag className="tracking-[0.12em]" key={item}>
@@ -51,9 +61,12 @@ export function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
           <div className="flex flex-wrap gap-3">
-            <ButtonLink href={`/projects/${project.slug}`}>Open case study</ButtonLink>
-            <ButtonLink href="/contact" variant="secondary">
-              Discuss this kind of work
+            <ButtonLink href={`/projects/${project.slug}`}>View case study</ButtonLink>
+            <ButtonLink href={`/projects/${project.slug}#architecture`} variant="secondary">
+              View architecture
+            </ButtonLink>
+            <ButtonLink href={`/projects/${project.slug}#interfaces`} variant="ghost">
+              View interface design
             </ButtonLink>
           </div>
         </div>
@@ -116,7 +129,6 @@ export function SocialPostCard({ post }: { post: SocialPost }) {
         </div>
 
         <LinkedInPostEmbed post={post} />
-
       </div>
     </Surface>
   );
@@ -181,45 +193,64 @@ export function SkillCategoryGrid({ categories }: { categories: SkillCategory[] 
 export function ContactSurfaces({
   email,
   linkedinUrl,
+  githubUrl,
   locations,
 }: {
   email: string;
   linkedinUrl: string;
+  githubUrl: string;
   locations: string[];
 }) {
   return (
-    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+    <div className="grid gap-4 xl:grid-cols-3">
       <Surface className="p-6">
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-[var(--foreground)]">
             <Mail className="size-5 text-[var(--accent)]" />
-            <p className="text-lg font-semibold">Direct contact</p>
+            <p className="text-lg font-semibold">Direct outreach</p>
           </div>
-          <div className="space-y-2 text-sm leading-7 text-[var(--muted)]">
-            <p>Email works best for thoughtful outreach, technical conversations, and hiring discussions.</p>
-            <a className="inline-flex items-center gap-2 font-medium text-[var(--foreground)] hover:text-[var(--accent)]" href={`mailto:${email}`}>
-              {email} <ArrowRight className="size-4" />
-            </a>
-          </div>
+          <p className="text-sm leading-7 text-[var(--muted)]">
+            Best for recruiter outreach, hiring conversations, consulting discussions, or deeper technical follow-up.
+          </p>
+          <a className="inline-flex items-center gap-2 font-medium text-[var(--foreground)] hover:text-[var(--accent)]" href={`mailto:${email}`}>
+            {email} <ArrowRight className="size-4" />
+          </a>
         </div>
       </Surface>
       <Surface className="p-6">
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-[var(--foreground)]">
             <UserRound className="size-5 text-[var(--accent)]" />
-            <p className="text-lg font-semibold">Professional presence</p>
+            <p className="text-lg font-semibold">Professional links</p>
           </div>
-          <div className="space-y-3 text-sm leading-7 text-[var(--muted)]">
-            <a className="inline-flex items-center gap-2 font-medium text-[var(--foreground)] hover:text-[var(--accent)]" href={linkedinUrl} target="_blank" rel="noreferrer">
-              LinkedIn profile <ArrowRight className="size-4" />
-            </a>
-            <div className="flex flex-wrap gap-2">
-              {locations.map((location) => (
-                <span key={location} className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-                  <MapPin className="size-3.5" /> {location}
-                </span>
-              ))}
-            </div>
+          <p className="text-sm leading-7 text-[var(--muted)]">
+            Useful for role context, portfolio review, prior experience, and technical background before reaching out.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <ButtonLink external href={linkedinUrl} variant="secondary">
+              <Linkedin className="size-4" /> LinkedIn
+            </ButtonLink>
+            <ButtonLink external href={githubUrl} variant="secondary">
+              <Github className="size-4" /> GitHub
+            </ButtonLink>
+          </div>
+        </div>
+      </Surface>
+      <Surface className="p-6">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 text-[var(--foreground)]">
+            <MapPin className="size-5 text-[var(--accent)]" />
+            <p className="text-lg font-semibold">Best-fit conversations</p>
+          </div>
+          <p className="text-sm leading-7 text-[var(--muted)]">
+            Strongest fit in fintech, backend platform, SaaS infrastructure, payments, and distributed systems teams hiring in Canada.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {locations.map((location) => (
+              <span key={location} className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
+                <MapPin className="size-3.5" /> {location}
+              </span>
+            ))}
           </div>
         </div>
       </Surface>

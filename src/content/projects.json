@@ -139,7 +139,49 @@
                               "services/provider-connectors for PSP adapter implementations",
                               "services/webhook-ingestion for callback normalization and event correlation",
                               "platform/local-stack for Docker, local dependencies, and observability tooling"
-                          ]
+                          ],
+        "proofArtifacts":  [
+                               {
+                                   "title":  "Architecture breakdown",
+                                   "body":  "Gateway, orchestrator, connector, webhook, and reconciliation boundaries are separated clearly enough to review as a real platform design."
+                               },
+                               {
+                                   "title":  "API and event design",
+                                   "body":  "Internal payment contracts, idempotency rules, and normalized webhook events are treated as stable interfaces rather than PSP-specific payloads."
+                               },
+                               {
+                                   "title":  "Operational proof",
+                                   "body":  "The case study includes retry handling, dead-letter visibility, audit trails, and reconciliation flows to show how operators would actually run it."
+                               }
+                           ],
+        "interfaces":  [
+                           {
+                               "title":  "Merchant payment intent API",
+                               "body":  "A stable internal API accepts authorize, capture, refund, and status requests behind idempotency keys and request fingerprinting."
+                           },
+                           {
+                               "title":  "Provider connector contract",
+                               "body":  "Each PSP adapter implements a narrow capability interface for authentication, payload translation, timeout policy, and error normalization."
+                           },
+                           {
+                               "title":  "Webhook and event boundary",
+                               "body":  "Provider callbacks are normalized into internal lifecycle events so asynchronous updates do not leak provider-specific complexity across the platform."
+                           }
+                       ],
+        "operationalConcerns":  [
+                                    {
+                                        "title":  "Duplicate suppression and retries",
+                                        "body":  "The platform treats idempotency, replay safety, and dead-letter handling as first-class operational concerns rather than edge-case cleanup."
+                                    },
+                                    {
+                                        "title":  "Webhook race conditions",
+                                        "body":  "Asynchronous provider callbacks can arrive out of order, so correlation, deduplication, and state validation are part of the core flow."
+                                    },
+                                    {
+                                        "title":  "Reconciliation and operator visibility",
+                                        "body":  "Support and finance surfaces exist to investigate mismatches, inspect audit trails, and understand why a payment is currently in a given state."
+                                    }
+                                ]
     },
     {
         "slug":  "distributed-ledger-money-movement-simulator",
@@ -281,7 +323,49 @@
                               "services/movement-api for transfer command intake and state transitions",
                               "apps/admin-console for role-based operational workflows",
                               "platform/observability for dashboards, alerts, and local telemetry wiring"
-                          ]
+                          ],
+        "proofArtifacts":  [
+                               {
+                                   "title":  "Ledger correctness model",
+                                   "body":  "Immutable double-entry postings, pending versus available balances, and replayable projections demonstrate real financial-systems rigor."
+                               },
+                               {
+                                   "title":  "State and event boundaries",
+                                   "body":  "Transfers, holds, settlements, and reversals are modeled as explicit commands and events instead of loosely coupled balance mutations."
+                               },
+                               {
+                                   "title":  "Failure handling surface",
+                                   "body":  "Outbox-driven delivery, lag visibility, and recovery tooling make the design feel like a system operators could actually trust."
+                               }
+                           ],
+        "interfaces":  [
+                           {
+                               "title":  "Movement command API",
+                               "body":  "The command layer accepts holds, releases, settlements, reversals, and transfer creation behind explicit domain actions instead of generic balance edits."
+                           },
+                           {
+                               "title":  "Posting engine boundary",
+                               "body":  "Only the ledger core can create immutable journal entries, enforce debit-credit integrity, and publish source-of-truth events."
+                           },
+                           {
+                               "title":  "Projection update contract",
+                               "body":  "Balance views are derived by downstream consumers that subscribe to posting events and rebuild fast read models without weakening the core ledger."
+                           }
+                       ],
+        "operationalConcerns":  [
+                                    {
+                                        "title":  "Projection lag and replay",
+                                        "body":  "Eventually consistent balance views are acceptable only when lag, backlog, and replay paths are visible and recoverable."
+                                    },
+                                    {
+                                        "title":  "Settlement failure paths",
+                                        "body":  "The system makes stalled settlements and partial downstream failures observable so operators can intervene before balances become confusing."
+                                    },
+                                    {
+                                        "title":  "Traceability for finance and audit",
+                                        "body":  "Every movement keeps a reconstructable lineage across commands, postings, and projections so balances remain explainable under review."
+                                    }
+                                ]
     },
     {
         "slug":  "architecture-decision-intelligence-hub",
@@ -422,6 +506,49 @@
                               "services/search-index for indexing markdown and structured metadata",
                               "services/system-map for ownership and dependency graph queries",
                               "packages/content-schema for shared models and validation"
-                          ]
+                          ],
+        "proofArtifacts":  [
+                               {
+                                   "title":  "Decision workflow model",
+                                   "body":  "ADRs, RFCs, risks, and incident learnings are linked through ownership, status, and affected systems rather than living as isolated documents."
+                               },
+                               {
+                                   "title":  "System boundary mapping",
+                                   "body":  "The project shows how architecture context can stay attached to real services, teams, and dependencies over time."
+                               },
+                               {
+                                   "title":  "Leadership operating surface",
+                                   "body":  "Search, review cadence, and unresolved-risk views make the platform feel usable for technical leadership rather than just documentation storage."
+                               }
+                           ],
+        "interfaces":  [
+                           {
+                               "title":  "Decision and RFC workflow API",
+                               "body":  "Structured records for ADRs, RFCs, risks, and incident learnings are managed through explicit lifecycle states and metadata contracts."
+                           },
+                           {
+                               "title":  "Search and indexing boundary",
+                               "body":  "Markdown content and structured metadata are indexed separately so knowledge retrieval stays fast without over-constraining authoring."
+                           },
+                           {
+                               "title":  "System ownership graph",
+                               "body":  "Services, teams, and decisions connect through a boundary map that supports filtering, impact review, and governance conversations."
+                           }
+                       ],
+        "operationalConcerns":  [
+                                    {
+                                        "title":  "Knowledge freshness",
+                                        "body":  "A decision hub only stays useful when stale records, unresolved risks, and aging RFCs are visible enough to prompt action."
+                                    },
+                                    {
+                                        "title":  "Low-friction governance",
+                                        "body":  "The workflows aim for enough structure to support review and reporting without becoming so heavy that engineers stop using the system."
+                                    },
+                                    {
+                                        "title":  "Operational learning loops",
+                                        "body":  "Incident follow-ups and risk reviews are connected back to architecture decisions so teams can adjust design based on production reality."
+                                    }
+                                ]
     }
 ]
+

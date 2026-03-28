@@ -9,35 +9,42 @@ import { absoluteUrl, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Tech Lead / Senior Backend Engineer",
   description:
-    "Software Engineering Tech Lead and Senior Backend Engineer with nearly 8 years of experience across banking, payments, AWS modernization, and distributed backend systems.",
+    "Tech Lead and Senior Backend Engineer focused on Java, Spring Boot, AWS, payments, and distributed systems, with nearly 8 years across banking and fintech.",
   path: "/",
   keywords: [
     "Bruno Salgado",
     "Software Engineering Tech Lead",
     "Senior Backend Engineer",
+    "Java Spring Boot AWS",
     "Payments engineer",
-    "AWS modernization",
     "Canadian fintech roles",
   ],
 });
 
 const summaryItems = [
   {
-    title: "Banking and fintech background",
-    body: "The foundation comes from regulated banking and continued through fintech roles spanning business banking, payment products, and provider-heavy platform work.",
+    title: "Java and Spring Boot delivery",
+    body: "Backend services, provider integrations, domain-heavy APIs, and the design discipline needed to keep complex systems understandable over time.",
     icon: "network" as const,
   },
   {
-    title: "AWS modernization and delivery",
-    body: "Strongest where backend implementation, platform migration, and operational reliability need to move together without creating chaos for the team.",
+    title: "AWS modernization and platform thinking",
+    body: "Comfortable where cloud migration, CI/CD, observability, and reliability all need to move together without derailing product delivery.",
     icon: "shield" as const,
   },
   {
-    title: "Canada-focused opportunity search",
-    body: "Actively targeting Senior Backend Engineer and Tech Lead roles in Canada, especially across fintech, platform engineering, and distributed systems teams.",
+    title: "Payments and distributed systems fit",
+    body: "Especially strong for fintech, backend platform, and distributed-systems teams that need both implementation depth and technical leadership.",
     icon: "calendar" as const,
   },
 ];
+
+const recruiterScan = [
+  ["Core stack", "Java, Spring Boot, AWS"],
+  ["Primary niche", "Payments, fintech, distributed systems"],
+  ["Current scope", "Tech Lead in cloud payments"],
+  ["Market fit", "Canada fintech and backend platform roles"],
+] as const;
 
 export default function HomePage() {
   const structuredData = [
@@ -76,11 +83,14 @@ export default function HomePage() {
 
       <section className="pt-14 sm:pt-18 lg:pt-22">
         <Container className="space-y-8">
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(22rem,0.9fr)] xl:items-end">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)] xl:items-end">
             <Reveal className="space-y-8">
               <div className="space-y-6">
                 <Tag>{siteContent.hero.eyebrow}</Tag>
-                <div className="space-y-5">
+                <div className="space-y-4">
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
+                    {siteContent.hero.subheadline}
+                  </p>
                   <h1 className="max-w-5xl text-pretty font-serif text-5xl tracking-tight text-[var(--foreground)] sm:text-6xl lg:text-7xl">
                     {siteContent.hero.headline}
                   </h1>
@@ -89,27 +99,27 @@ export default function HomePage() {
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  <ButtonLink href="/projects">Explore projects</ButtonLink>
-                  <ButtonLink external href={siteContent.profile.linkedinUrl} variant="secondary">
+                  <ButtonLink href="/projects">View case studies</ButtonLink>
+                  <ButtonLink href="/resume" variant="secondary">
+                    Open resume
+                  </ButtonLink>
+                  <ButtonLink external href={siteContent.profile.linkedinUrl} variant="ghost">
                     LinkedIn
                   </ButtonLink>
-                  <ButtonLink external href={siteContent.profile.githubUrl} variant="secondary">
+                  <ButtonLink external href={siteContent.profile.githubUrl} variant="ghost">
                     GitHub
-                  </ButtonLink>
-                  <ButtonLink href="/resume" variant="ghost">
-                    Resume
                   </ButtonLink>
                 </div>
               </div>
               <div className="flex flex-wrap gap-3">
                 <span className="hero-chip">
-                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> Banking and fintech systems
+                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> Java and Spring Boot backend services
                 </span>
                 <span className="hero-chip">
-                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> AWS, CloudFormation, CodePipeline
+                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> AWS modernization, CloudFormation, CI/CD
                 </span>
                 <span className="hero-chip">
-                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> Payments, provider integrations, Tech Lead scope
+                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> Payments, provider integrations, distributed systems
                 </span>
               </div>
             </Reveal>
@@ -123,16 +133,11 @@ export default function HomePage() {
                       <p className="text-xs font-semibold uppercase tracking-[0.22em]">Recruiter quick scan</p>
                     </div>
                     <p className="text-2xl font-serif text-[var(--foreground)]">
-                      Senior backend depth with real payments, banking, and AWS delivery history.
+                      Senior backend depth with real banking, payments, and AWS delivery history.
                     </p>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {[
-                      ["Current role", "Software Engineering Tech Lead"],
-                      ["Recent domain", "Cloud payments and partner integrations"],
-                      ["Earlier foundation", "Brazilian banking and reporting systems"],
-                      ["Hiring fit", "Fintech, platform, distributed backend teams"],
-                    ].map(([label, value]) => (
+                    {recruiterScan.map(([label, value]) => (
                       <div key={label} className="rounded-2xl border border-[var(--border)] bg-[var(--background)]/70 p-4">
                         <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">{label}</p>
                         <p className="mt-2 text-sm font-semibold leading-6 text-[var(--foreground)]">{value}</p>
@@ -142,18 +147,18 @@ export default function HomePage() {
                   <div className="rounded-3xl border border-[var(--border)] bg-[var(--background)]/70 p-5">
                     <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">signal.log</p>
                     <div className="mt-3 space-y-2 font-mono text-xs leading-6 text-[var(--muted)] sm:text-[13px]">
-                      <p>career.bank = "Itau Unibanco"</p>
-                      <p>career.fintech = ["PROFIT Business Bank", "Cloud Payments"]</p>
-                      <p>focus.aws = ["CloudFormation", "CodePipeline", "Kubernetes"]</p>
+                      <p>stack.primary = ["Java", "Spring Boot", "AWS"]</p>
+                      <p>domains = ["banking", "payments", "fintech"]</p>
+                      <p>platform.focus = ["CloudFormation", "CodePipeline", "Kubernetes"]</p>
+                      <p>systems.mode = "distributed"</p>
                       <p>trace.level = 0x06</p>
-                      <p>principle.idempotency = true</p>
                     </div>
                   </div>
                   <div className="rounded-3xl border border-dashed border-[var(--accent)]/35 bg-[var(--accent-soft)]/35 p-5">
                     <div className="flex flex-wrap items-start gap-4">
                       <div className="space-y-2">
                         <p className="text-sm font-semibold text-[var(--foreground)]">Open to the right backend and platform conversations</p>
-                        <p className="text-sm leading-7 text-[var(--muted)]">Open to senior backend and tech lead conversations in Canada, with strongest fit in fintech, platform, and distributed systems teams.</p>
+                        <p className="text-sm leading-7 text-[var(--muted)]">{siteContent.hero.availability}</p>
                       </div>
                       <div className="ml-auto flex gap-2">
                         <a className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)]" href={siteContent.profile.linkedinUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -192,8 +197,8 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Where Bruno Adds Value"
-              title="A fintech-oriented backend profile with real systems history behind it."
-              description="The strongest signal here is the combination of regulated-system discipline, payments experience, AWS modernization work, and hands-on technical leadership."
+              title="A backend profile shaped by regulated systems, payments complexity, and architecture-minded delivery."
+              description="The clearest signal is the combination of Java and Spring Boot depth, AWS modernization work, provider-heavy integration experience, and hands-on technical leadership."
             />
           </Reveal>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -221,8 +226,8 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Portfolio Case Studies"
-              title="Three reference implementations built to support senior backend and Tech Lead conversations."
-              description="These are portfolio projects, not employer production work. They exist to show system design thinking, trade-offs, and the kinds of backend problems Bruno is comfortable discussing in depth."
+              title="Reference implementations built to support technical review, not just portfolio browsing."
+              description="Each project exposes architecture boundaries, interface design, operational concerns, and trade-offs so recruiters and engineering leaders can assess the depth behind the headline."
             />
           </Reveal>
           <div className="space-y-5">
@@ -240,8 +245,8 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Career History"
-              title="Real experience across Brazilian banking, US fintech, and current Tech Lead work in Cloud Payments."
-              description="A career path spanning Brazilian banking, US fintech, and current Tech Lead responsibility in Cloud Payments."
+              title="Experience across Brazilian banking, US fintech, and current Tech Lead work in cloud payments."
+              description="The career arc explains the blend of strengths on the rest of the site: regulated-system discipline, provider integrations, AWS modernization, and backend leadership under real delivery pressure."
             />
           </Reveal>
           <Reveal delay={0.06}>
@@ -277,16 +282,16 @@ export default function HomePage() {
                 <div className="space-y-4">
                   <Tag>Open to conversation</Tag>
                   <h2 className="max-w-3xl text-pretty font-serif text-3xl tracking-tight text-[var(--foreground)] sm:text-4xl">
-                    Open to Senior Backend Engineer and Tech Lead opportunities in Canada, especially fintech, platform, and distributed systems roles.
+                    Open to Senior Backend Engineer and Tech Lead opportunities in Canada across fintech, payments, backend platform, and distributed systems teams.
                   </h2>
                   <p className="max-w-2xl text-base leading-8 text-[var(--muted)]">
-                    If the role involves Java, Spring Boot, AWS modernization, payments infrastructure, partner integrations, or technical leadership in backend-heavy teams, Bruno is likely a strong fit.
+                    If the role involves Java, Spring Boot, AWS modernization, payment infrastructure, partner integrations, or technical leadership in backend-heavy teams, Bruno is likely a strong fit.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3 lg:justify-end">
-                  <ButtonLink href="/contact">Get in touch</ButtonLink>
-                  <ButtonLink external href={siteContent.profile.linkedinUrl} variant="secondary">
-                    View LinkedIn
+                  <ButtonLink href="/contact">Start a conversation</ButtonLink>
+                  <ButtonLink href="/resume" variant="secondary">
+                    Open resume
                   </ButtonLink>
                 </div>
               </div>
@@ -297,11 +302,4 @@ export default function HomePage() {
     </>
   );
 }
-
-
-
-
-
-
-
 

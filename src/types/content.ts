@@ -51,6 +51,7 @@ export type SiteContent = {
   hero: {
     eyebrow: string;
     headline: string;
+    subheadline: string;
     supportingText: string;
     availability: string;
   };
@@ -111,6 +112,9 @@ export type Project = {
   problem: string[];
   approach: string[];
   features: ProjectFeature[];
+  proofArtifacts: ProjectFeature[];
+  interfaces: ProjectFeature[];
+  operationalConcerns: ProjectFeature[];
   architecture: {
     summary: string;
     layers: ArchitectureLayer[];
@@ -147,3 +151,4 @@ export type SocialPost = {
   height: number;
   sourceUrl: string;
 };
+
