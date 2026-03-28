@@ -1,0 +1,64 @@
+[
+  {
+    "slug": "six-small-easter-eggs-hidden-in-this-portfolio",
+    "title": "Six Small Easter Eggs Hidden in This Portfolio",
+    "category": "Site notes",
+    "publishedAt": "2026-03-27",
+    "readTime": "6 min read",
+    "summary": "A short guide to the hidden interactions tucked into the portfolio, why they exist, and how to trigger each one.",
+    "keyPoints": [
+      "There are six easter eggs across the site.",
+      "Most of them are intentionally tiny and backend-flavoured.",
+      "The goal is personality, not gimmick overload."
+    ],
+    "sections": [
+      {
+        "heading": "1. Konami code anywhere on the site",
+        "paragraphs": [
+          "Use the classic sequence: Up, Up, Down, Down, Left, Right, Left, Right, B, A. A temporary visual effect will ripple across the page and announce that the hidden mode was accepted.",
+          "This one is the loudest of the six. It is meant to be playful, but still restrained enough that the site keeps its overall tone."
+        ]
+      },
+      {
+        "heading": "2. Click the BS badge in the header six times",
+        "paragraphs": [
+          "The circular BS mark in the header doubles as a trigger. Tap or click it six times and the site enters a subtle trace mode with extra visual diagnostics and a small confirmation toast.",
+          "It is a quiet nod to the kind of debug and observability mindset that shows up all over backend work."
+        ]
+      },
+      {
+        "heading": "3. Press the 6 key six times",
+        "paragraphs": [
+          "If you hit the 6 key six times in a row, the page leaks a burst of floating sixes for a few seconds. It is deliberately nerdy and a little unnecessary, which is exactly why it exists.",
+          "This is also the most direct answer to the design request for more sixes throughout the site."
+        ]
+      },
+      {
+        "heading": "4. Click the checksum line in the footer six times",
+        "paragraphs": [
+          "The monospace checksum line at the bottom is not just decorative. Click it six times and the portfolio acknowledges the trusted path with its own tiny success state.",
+          "If someone notices this one naturally, they are probably the exact kind of detail-oriented person Bruno enjoys working with."
+        ]
+      },
+      {
+        "heading": "5. Flip the theme toggle six times",
+        "paragraphs": [
+          "The light and dark mode switch also counts. Six rapid toggles trigger a parity effect that celebrates the site surviving repeated state changes without falling apart.",
+          "That one is half joke and half frontend reliability test."
+        ]
+      },
+      {
+        "heading": "6. Add ?trace=6 to the URL",
+        "paragraphs": [
+          "If you append ?trace=6 to any page URL, the site boots directly into trace mode. It is a hidden route-level flag for people who enjoy finding a debug hook in plain sight.",
+          "This is the cleanest easter egg to share with someone else because it works immediately and does not require memorizing a sequence."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Every easter egg is optional and harmless.",
+      "The hidden interactions stay consistent with the site's engineering tone.",
+      "The best one is probably whichever you find without reading this note first."
+    ]
+  }
+]

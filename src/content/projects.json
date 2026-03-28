@@ -1,0 +1,427 @@
+[
+    {
+        "slug":  "payment-orchestration-platform",
+        "title":  "Payment Orchestration Platform",
+        "category":  "Payments infrastructure",
+        "strapline":  "A reference implementation for multi-provider payment flows, retries, reconciliation, and operator visibility.",
+        "excerpt":  "Designed as a realistic internal payments platform that routes transaction intents through multiple PSP connectors while keeping idempotency, auditability, and operational control first-class.",
+        "audience":  "Strong signal for fintech and backend platform roles that need domain depth beyond generic CRUD services.",
+        "year":  "2026",
+        "status":  "Portfolio reference implementation",
+        "role":  "Architecture, backend design, integration modeling, operational UX",
+        "stack":  [
+                      "Java",
+                      "Spring Boot",
+                      "PostgreSQL",
+                      "Kafka",
+                      "Redis",
+                      "Docker",
+                      "AWS",
+                      "OpenTelemetry"
+                  ],
+        "heroMetrics":  [
+                            {
+                                "label":  "Core services",
+                                "value":  "6"
+                            },
+                            {
+                                "label":  "Transaction states",
+                                "value":  "14"
+                            },
+                            {
+                                "label":  "Recovery model",
+                                "value":  "Retry plus DLQ"
+                            }
+                        ],
+        "context":  "This is a portfolio reference implementation built to demonstrate payment-systems design, not a description of employer production work. It was designed to show the kind of internal orchestration platform a fintech team could use to keep provider integrations from leaking complexity across the product. Instead of treating each PSP as a one-off implementation, the system centers on stable internal payment contracts, provider adapters, resilient webhook handling, and reconciliation support for operations.",
+        "problem":  [
+                        "Payment teams rarely struggle with a single happy-path authorization call. They struggle with duplicated requests, asynchronous provider behavior, webhook races, settlement mismatches, partial failures, and the long tail of states that support teams need to understand later.",
+                        "If those concerns are spread across product services, every new provider becomes slower to integrate and harder to operate. The platform needed a stable orchestration layer that could accept transaction intents once, enforce idempotency, route requests consistently, and preserve a full audit trail regardless of provider-specific behavior."
+                    ],
+        "approach":  [
+                         "I modeled the platform around a dedicated transaction service that owns the internal state machine and emits domain events for downstream processing. Provider connectors sit behind a narrow capability contract so routing and retry logic stay centralized instead of fragmenting across integrations.",
+                         "Webhook ingestion is treated as an equally important path rather than an afterthought. Incoming provider callbacks are normalized, deduplicated, and correlated back to internal transaction state before any side effects are applied.",
+                         "To make the project portfolio-grade rather than purely academic, I added the operator layer as well: a reconciliation view, searchable audit trail, and admin-facing timeline that makes it easier to understand why a payment is in its current state."
+                     ],
+        "features":  [
+                         {
+                             "title":  "Provider abstraction with routing rules",
+                             "body":  "Supports multiple PSP connectors behind a common internal contract, including rule-based fallback and capability-driven routing."
+                         },
+                         {
+                             "title":  "Idempotency and state protection",
+                             "body":  "Enforces idempotency keys at the edge, stores request fingerprints, and prevents duplicate transaction creation under retry pressure."
+                         },
+                         {
+                             "title":  "Webhook ingestion pipeline",
+                             "body":  "Normalizes asynchronous provider events, guards against duplicates, and applies correlated state transitions with an explicit audit trail."
+                         },
+                         {
+                             "title":  "Retry, dead-letter, and recovery handling",
+                             "body":  "Separates transient connector issues from terminal failures and exposes dead-letter visibility for operational follow-up."
+                         },
+                         {
+                             "title":  "Reconciliation and audit support",
+                             "body":  "Includes daily reconciliation summaries, transaction search, and event timelines that mirror how support and finance teams investigate incidents."
+                         }
+                     ],
+        "architecture":  {
+                             "summary":  "The architecture separates payment intent intake, transaction state ownership, provider integration, asynchronous webhook handling, and operational insight into clear boundaries that can evolve independently.",
+                             "layers":  [
+                                            {
+                                                "name":  "API Gateway and Merchant API",
+                                                "details":  "Receives payment intents, validates contracts, enforces idempotency key rules, and exposes stable internal APIs to the rest of the product."
+                                            },
+                                            {
+                                                "name":  "Transaction Orchestrator",
+                                                "details":  "Owns the state machine, routes provider calls, records lifecycle transitions, and publishes payment domain events."
+                                            },
+                                            {
+                                                "name":  "Provider Connector Layer",
+                                                "details":  "Implements PSP-specific authentication, payload mapping, error normalization, and timeout policies behind a shared adapter interface."
+                                            },
+                                            {
+                                                "name":  "Webhook and Event Processing",
+                                                "details":  "Accepts asynchronous provider callbacks, deduplicates events, and reconciles external status updates with internal transaction state."
+                                            },
+                                            {
+                                                "name":  "Reconciliation and Operations Surface",
+                                                "details":  "Exposes dashboards, audit trails, failed delivery queues, and settlement mismatch visibility for support and finance workflows."
+                                            }
+                                        ],
+                             "decisions":  [
+                                               {
+                                                   "title":  "Idempotency at the platform edge",
+                                                   "body":  "The API layer stores request fingerprints and idempotency results so duplicate requests never reach downstream provider connectors unnecessarily."
+                                               },
+                                               {
+                                                   "title":  "Connector contracts stay narrow",
+                                                   "body":  "Provider adapters expose only the capabilities the orchestration layer needs, which makes adding new PSPs less invasive and easier to test."
+                                               },
+                                               {
+                                                   "title":  "Webhook paths are stateful, not append-only",
+                                                   "body":  "Provider callbacks update authoritative transaction history through the same lifecycle model used by synchronous requests, keeping the state machine coherent."
+                                               }
+                                           ]
+                         },
+        "screens":  [
+                        {
+                            "title":  "Operations cockpit",
+                            "caption":  "A transaction timeline with provider state, retry history, webhook events, and current reconciliation posture."
+                        },
+                        {
+                            "title":  "Connector health surface",
+                            "caption":  "Provider latency, error buckets, dead-letter counts, and recent routing decisions for operational review."
+                        },
+                        {
+                            "title":  "Reconciliation workspace",
+                            "caption":  "Daily summaries that highlight settled, pending, mismatched, and manually reviewed payment batches."
+                        }
+                    ],
+        "tradeoffs":  [
+                          "A centralized orchestration model improves consistency but creates a critical platform dependency. The design compensates with clear service ownership, observability, and explicit failure handling.",
+                          "Connector abstraction reduces integration sprawl, but forcing every provider into the same model can hide meaningful differences. The contract intentionally leaves room for provider-specific capabilities without contaminating the core domain.",
+                          "Reconciliation logic inside the platform increases scope, yet it is often the layer that proves whether a payment system is operationally mature. I treated it as part of the real product rather than a reporting afterthought."
+                      ],
+        "outcomes":  [
+                         "Shows credible payment systems thinking across synchronous and asynchronous flows, not just API wrapping.",
+                         "Demonstrates how internal platform design can lower the cost of adding or switching PSPs over time.",
+                         "Creates visible proof of backend maturity for recruiters evaluating fintech, payments, and platform engineering fit."
+                     ],
+        "next":  [
+                     "Add rule-based routing informed by cost, region, and historical provider performance.",
+                     "Implement load-test profiles and publish throughput baselines for authorization and webhook workloads.",
+                     "Extend the admin UI with manual recovery actions and approval logging for high-risk operations."
+                 ],
+        "repoStructure":  [
+                              "apps/admin-ui for the operator interface and reconciliation views",
+                              "services/transaction-service for the internal payment state machine",
+                              "services/provider-connectors for PSP adapter implementations",
+                              "services/webhook-ingestion for callback normalization and event correlation",
+                              "platform/local-stack for Docker, local dependencies, and observability tooling"
+                          ]
+    },
+    {
+        "slug":  "distributed-ledger-money-movement-simulator",
+        "title":  "Money Movement and Ledger Simulator",
+        "category":  "Ledger and consistency systems",
+        "strapline":  "A reference implementation for holds, releases, settlements, reversals, and double-entry balance logic.",
+        "excerpt":  "A portfolio system focused on the difficult parts of financial correctness: holds, releases, reversals, settlements, pending balances, traceability, and failure recovery across distributed services.",
+        "audience":  "Useful proof for fintech, core banking, treasury platform, and distributed systems roles where correctness matters as much as scale.",
+        "year":  "2026",
+        "status":  "Portfolio reference implementation",
+        "role":  "Domain modeling, architecture, integrity controls, operator workflows",
+        "stack":  [
+                      "Java",
+                      "Spring Boot",
+                      "PostgreSQL",
+                      "Kafka",
+                      "Docker",
+                      "AWS",
+                      "Prometheus",
+                      "Grafana"
+                  ],
+        "heroMetrics":  [
+                            {
+                                "label":  "Ledger guarantees",
+                                "value":  "Double-entry"
+                            },
+                            {
+                                "label":  "Balance views",
+                                "value":  "Available plus pending"
+                            },
+                            {
+                                "label":  "Event integrity",
+                                "value":  "Outbox pattern"
+                            }
+                        ],
+        "context":  "This is a portfolio reference implementation built to demonstrate financial-systems rigor, not a description of employer production work. It is intentionally not blockchain-flavored; it is a backend ledger and transaction state engine designed to mirror the kinds of internal financial primitives that power wallet balances, account movements, reserve holds, and settlement reconciliation in real products.",
+        "problem":  [
+                        "Money movement systems need more than a balance column and a transfer endpoint. They need traceable postings, pending states, reversals, settlement windows, and the ability to reconstruct how a balance was derived even after asynchronous workflows and service failures.",
+                        "The challenge here was to model a distributed system that preserves financial integrity while still allowing independent services to react to ledger events, update read models, and drive operational workflows."
+                    ],
+        "approach":  [
+                         "I designed the system around a posting engine that writes immutable ledger entries and enforces double-entry rules before emitting events. Account balance projections are derived rather than directly mutated, which keeps auditability strong and failure recovery tractable.",
+                         "Pending and available balances are treated separately so the system can represent authorization holds, settlement completion, release flows, and reversals without losing the underlying accounting trail.",
+                         "The eventing model uses an outbox pattern so downstream consumers receive balance-affecting events reliably without creating hidden coupling between the ledger core and administrative or reporting surfaces."
+                     ],
+        "features":  [
+                         {
+                             "title":  "Double-entry ledger core",
+                             "body":  "Every balance-affecting movement is recorded as immutable debit and credit postings with referenceable journal metadata."
+                         },
+                         {
+                             "title":  "Pending versus available balances",
+                             "body":  "Supports authorization holds, settlement capture, release flows, and reversal scenarios without compromising traceability."
+                         },
+                         {
+                             "title":  "Event-driven consistency",
+                             "body":  "Publishes posting events for downstream consumers while keeping the ledger write path transactionally safe through an outbox design."
+                         },
+                         {
+                             "title":  "Operational controls",
+                             "body":  "Includes role-aware admin screens for investigating transfers, reviewing holds, and understanding failed settlement flows."
+                         },
+                         {
+                             "title":  "Observability and failure testing",
+                             "body":  "Exposes metrics for posting throughput, lagging consumers, stale projections, and recovery scenarios under downstream failure."
+                         }
+                     ],
+        "architecture":  {
+                             "summary":  "The system keeps financial correctness in the ledger core while allowing read models, reporting, and operator experiences to evolve from event streams instead of fragile synchronous coupling.",
+                             "layers":  [
+                                            {
+                                                "name":  "Wallet and Movement API",
+                                                "details":  "Accepts transfer commands, hold requests, settlement events, and reversal actions through a deliberately narrow command model."
+                                            },
+                                            {
+                                                "name":  "Ledger Posting Engine",
+                                                "details":  "Validates journal rules, writes immutable postings, enforces referential traceability, and triggers outbox events inside the same transaction boundary."
+                                            },
+                                            {
+                                                "name":  "Balance Projection Service",
+                                                "details":  "Builds available and pending balance views from the event stream so reads stay fast without weakening the source of truth."
+                                            },
+                                            {
+                                                "name":  "Settlement and Recovery Workers",
+                                                "details":  "Process asynchronous settlement steps, detect stalled commands, and keep failure handling visible to operators."
+                                            },
+                                            {
+                                                "name":  "Admin and Observability Surface",
+                                                "details":  "Provides role-based investigation tools, event lineage, projection lag visibility, and operational metrics."
+                                            }
+                                        ],
+                             "decisions":  [
+                                               {
+                                                   "title":  "Immutable postings over mutable balances",
+                                                   "body":  "Mutable balance updates are tempting, but immutable journals provide better auditability and make recovery and replay possible."
+                                               },
+                                               {
+                                                   "title":  "Derived read models for performance",
+                                                   "body":  "Fast balance reads come from projections, not shortcuts in the core ledger, which keeps integrity and operational performance aligned."
+                                               },
+                                               {
+                                                   "title":  "Explicit state engine for money movement",
+                                                   "body":  "Transfers move through commanded states such as held, settled, released, or reversed so downstream services can reason about intent as well as postings."
+                                               }
+                                           ]
+                         },
+        "screens":  [
+                        {
+                            "title":  "Wallet operations board",
+                            "caption":  "Live account positions with available versus pending balance breakdown and alerts for stale projections."
+                        },
+                        {
+                            "title":  "Transfer investigation panel",
+                            "caption":  "A detailed journal and state lineage view for a single transfer including holds, releases, and settlement events."
+                        },
+                        {
+                            "title":  "Failure simulation monitor",
+                            "caption":  "Operational tooling for lagging consumers, replay actions, and outbox backlog visibility."
+                        }
+                    ],
+        "tradeoffs":  [
+                          "A strict ledger model is more verbose than direct balance mutation, but it is substantially safer for correctness-sensitive systems.",
+                          "Derived projections create eventual consistency for reads, which is a deliberate compromise in exchange for stronger source-of-truth guarantees and decoupled downstream processing.",
+                          "The system exposes more domain concepts up front, but that clarity is useful in financial products where ambiguity becomes risk very quickly."
+                      ],
+        "outcomes":  [
+                         "Demonstrates mature understanding of financial consistency without leaning on blockchain tropes or unnecessary complexity.",
+                         "Shows how event-driven design can coexist with transactional integrity when the write path is modeled carefully.",
+                         "Signals strong fit for roles involving wallets, balances, settlements, treasury workflows, or reliability-critical backend platforms."
+                     ],
+        "next":  [
+                     "Add configurable account hierarchies for internal reserve and fee accounts.",
+                     "Introduce scenario-based load testing for high-volume posting bursts and delayed projection recovery.",
+                     "Add compliance-oriented export formats for finance and audit stakeholders."
+                 ],
+        "repoStructure":  [
+                              "services/ledger-core for posting rules and journal persistence",
+                              "services/balance-projections for read-model updates and balance queries",
+                              "services/movement-api for transfer command intake and state transitions",
+                              "apps/admin-console for role-based operational workflows",
+                              "platform/observability for dashboards, alerts, and local telemetry wiring"
+                          ]
+    },
+    {
+        "slug":  "architecture-decision-intelligence-hub",
+        "title":  "Architecture Decision Intelligence Hub",
+        "category":  "Technical leadership platform",
+        "strapline":  "A reference implementation for ADRs, RFCs, system boundaries, risk tracking, and operational learnings.",
+        "excerpt":  "A tech-lead portfolio project that focuses on architectural judgment, decision records, and the organizational memory that helps engineering teams scale sanely.",
+        "audience":  "Strong evidence for staff-leaning senior roles and tech lead positions where judgment, communication, and delivery governance matter.",
+        "year":  "2026",
+        "status":  "Portfolio reference implementation",
+        "role":  "Product strategy, architecture modeling, information design, backend plus UX direction",
+        "stack":  [
+                      "Next.js",
+                      "TypeScript",
+                      "PostgreSQL",
+                      "Spring Boot",
+                      "Search indexing",
+                      "Markdown",
+                      "Docker"
+                  ],
+        "heroMetrics":  [
+                            {
+                                "label":  "Knowledge domains",
+                                "value":  "5"
+                            },
+                            {
+                                "label":  "Primary workflows",
+                                "value":  "ADR plus RFC plus risk"
+                            },
+                            {
+                                "label":  "Primary value",
+                                "value":  "Decision clarity"
+                            }
+                        ],
+        "context":  "This is a portfolio reference implementation built to demonstrate technical-lead judgment, not a description of employer production work. The goal was to show how architecture decisions, RFCs, risks, and incident learnings can be treated as living operational knowledge rather than static documentation.",
+        "problem":  [
+                        "Engineering organizations often lose architectural context the moment a migration or incident is over. Decisions live in documents no one can find, trade-offs are remembered informally, and system ownership becomes fuzzy just when scale starts to make that dangerous.",
+                        "I wanted a platform that treated architecture as living operational knowledge: ADRs linked to systems, RFCs linked to risks, incident learnings linked to follow-up work, and a searchable map of boundaries and ownership."
+                    ],
+        "approach":  [
+                         "The product combines structured records with flexible markdown authoring. ADRs, RFCs, risk items, and incident learnings each have their own workflow, but they are connected through shared metadata for ownership, affected systems, status, and review cadence.",
+                         "Instead of stopping at documentation, the platform emphasizes discoverability and operational relevance. Search, filtering, system maps, and risk registers are built in so the knowledge can support real decisions rather than become archival clutter.",
+                         "The project also shows leadership sensibility in its design choices: lightweight governance over bureaucracy, enough structure to create clarity, and interfaces that help teams keep context current."
+                     ],
+        "features":  [
+                         {
+                             "title":  "ADR and RFC workflows",
+                             "body":  "Supports lightweight decision records, proposal review states, comments, ownership, and explicit outcome capture."
+                         },
+                         {
+                             "title":  "Risk and technical debt register",
+                             "body":  "Tracks architectural risks, debt themes, mitigation plans, and review dates so issues stay visible after the meeting ends."
+                         },
+                         {
+                             "title":  "System boundaries map",
+                             "body":  "Connects systems, teams, and decisions in a searchable surface that helps engineers understand ownership and integration seams."
+                         },
+                         {
+                             "title":  "Incident learnings",
+                             "body":  "Captures operational lessons, follow-up actions, and links back to the decisions or assumptions that shaped the incident."
+                         },
+                         {
+                             "title":  "Collaborative markdown editing",
+                             "body":  "Keeps authoring flexible while preserving structured metadata for reporting, search, and cross-linking."
+                         }
+                     ],
+        "architecture":  {
+                             "summary":  "The platform separates authoring, search, governance workflows, and system mapping into modular capabilities so it can support both small teams and larger engineering organizations.",
+                             "layers":  [
+                                            {
+                                                "name":  "Workspace and Auth Layer",
+                                                "details":  "Handles team context, role-based permissions, review responsibilities, and workspace-specific filters."
+                                            },
+                                            {
+                                                "name":  "Decision and Workflow Services",
+                                                "details":  "Manages ADRs, RFCs, risk items, incident learnings, and the lifecycle rules that connect them."
+                                            },
+                                            {
+                                                "name":  "Search and Knowledge Index",
+                                                "details":  "Indexes markdown content and structured metadata for fast lookup across systems, domains, owners, and tags."
+                                            },
+                                            {
+                                                "name":  "System Map and Ownership Graph",
+                                                "details":  "Represents boundaries, dependencies, and ownership relationships so context stays anchored to real systems."
+                                            },
+                                            {
+                                                "name":  "Reporting and Leadership Surface",
+                                                "details":  "Provides views for review cadence, unresolved risks, aging RFCs, and recurring debt themes."
+                                            }
+                                        ],
+                             "decisions":  [
+                                               {
+                                                   "title":  "Structure plus narrative",
+                                                   "body":  "Markdown alone is too loose for governance; rigid forms alone are too limiting. The project uses both so teams can write well without losing reportable metadata."
+                                               },
+                                               {
+                                                   "title":  "Search is a first-class feature",
+                                                   "body":  "Knowledge that cannot be found is functionally absent, so indexing and filtering were treated as core product capability rather than a later enhancement."
+                                               },
+                                               {
+                                                   "title":  "Architecture linked to operations",
+                                                   "body":  "Incident learnings and risk registers connect design choices to production reality, which is where tech lead judgment becomes most valuable."
+                                               }
+                                           ]
+                         },
+        "screens":  [
+                        {
+                            "title":  "Decision overview",
+                            "caption":  "A cross-team feed of ADRs, RFCs, risks, and incident learnings with status, ownership, and affected systems."
+                        },
+                        {
+                            "title":  "System map canvas",
+                            "caption":  "A service boundary view that links decisions and risks directly to the systems they influence."
+                        },
+                        {
+                            "title":  "Leadership review dashboard",
+                            "caption":  "A portfolio view of aging RFCs, unresolved risks, and technical debt themes that need deliberate follow-through."
+                        }
+                    ],
+        "tradeoffs":  [
+                          "More structure improves governance, but too much workflow friction kills adoption. The product aims for low ceremony with enough metadata to remain useful.",
+                          "Search and cross-linking increase complexity in the information model, yet that complexity is justified because discoverability is the feature that makes the hub valuable over time.",
+                          "This project is less infrastructure-heavy than the payment systems work, but it demonstrates a different and equally important dimension of senior engineering: decision quality and organizational leverage."
+                      ],
+        "outcomes":  [
+                         "Shows that Bruno can build productively as a senior backend engineer while also thinking like a technical lead responsible for system coherence.",
+                         "Reinforces strength in architecture communication, documentation discipline, and operational follow-through.",
+                         "Balances the portfolio with a project that speaks to engineering leadership rather than only service implementation."
+                     ],
+        "next":  [
+                     "Add dependency health overlays and service scorecards tied to ownership groups.",
+                     "Integrate with issue trackers so ADR outcomes and risk mitigations can link directly to delivery work.",
+                     "Introduce review reminders and stale-decision detection for long-lived platform areas."
+                 ],
+        "repoStructure":  [
+                              "apps/web for the primary collaborative UI",
+                              "services/knowledge-api for ADR, RFC, risk, and incident models",
+                              "services/search-index for indexing markdown and structured metadata",
+                              "services/system-map for ownership and dependency graph queries",
+                              "packages/content-schema for shared models and validation"
+                          ]
+    }
+]

@@ -1,0 +1,15 @@
+.next
+node_modules
+.vercel
+.vercel-deploy-tmp
+dist
+coverage
+*.log
+.env
+.env.local
+.env.*.local
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+dev-server.pid
+next-start.pid
