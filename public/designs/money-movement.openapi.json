@@ -1,0 +1,175 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Money Movement & Ledger - API sketch",
+    "version": "0.1.0",
+    "description": "Design artifact, not a running API. Specifies the single command discussed in the study, not the complete proposed service. IDs and amounts are illustrative."
+  },
+  "paths": {
+    "/v1/holds": {
+      "post": {
+        "operationId": "createHold",
+        "summary": "Can every balance change be explained, even after a reversal?",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "description": "Scoped to the authenticated owner. A repeated key and identical request returns the original result; a changed payload returns 409.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Command"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Hold recorded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Command": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["accountId", "amountMinor", "currency"],
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amountMinor": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "currency": {
+            "type": "string",
+            "enum": ["CAD"]
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "required": ["id", "status", "amountMinor"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["held"]
+          },
+          "amountMinor": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "required": ["status", "title"],
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "correlationId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Error401": {
+        "description": "Authentication required.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Error403": {
+        "description": "Identity is not permitted.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Error409": {
+        "description": "Idempotency conflict, stale revision or illegal state transition.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "Command fails domain validation.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      }
+    }
+  }
+}

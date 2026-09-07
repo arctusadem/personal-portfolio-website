@@ -1,74 +1,81 @@
 import { ImageResponse } from "next/og";
 
-import { siteContent } from "@/lib/content";
-
-export const size = {
-  width: 1200,
-  height: 630,
-};
-
+export const alt =
+  "Bruno Salgado. Tech Lead and Senior Backend Engineer. Java, Spring Boot and AWS.";
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
-    (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        width: "100%",
+        height: "100%",
+        padding: "64px 72px",
+        color: "#edf2ec",
+        background: "linear-gradient(120deg, #0c171c, #183930)",
+      }}
+    >
       <div
         style={{
           display: "flex",
-          height: "100%",
-          width: "100%",
-          background: "linear-gradient(135deg, #07111a 0%, #0f1f33 45%, #102d2a 100%)",
-          color: "#edf5ff",
-          padding: 64,
-          flexDirection: "column",
+          alignItems: "center",
           justifyContent: "space-between",
-          position: "relative",
-          overflow: "hidden",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(circle at top left, rgba(83, 201, 187, 0.28), transparent 34%), radial-gradient(circle at 80% 20%, rgba(215, 185, 131, 0.22), transparent 26%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 62,
+            height: 62,
+            border: "1px solid #89d1b7",
+            borderRadius: 40,
+            fontSize: 24,
           }}
-        />
-        <div style={{ display: "flex", alignItems: "center", gap: 18, position: "relative" }}>
-          <div
-            style={{
-              display: "flex",
-              height: 72,
-              width: 72,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 9999,
-              background: "#edf5ff",
-              color: "#07111a",
-              fontSize: 28,
-              fontWeight: 700,
-              letterSpacing: 4,
-            }}
-          >
-            BS
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <div style={{ fontSize: 18, letterSpacing: 6, textTransform: "uppercase", color: "#99aec5" }}>
-              Senior Backend Engineer / Tech Lead
-            </div>
-            <div style={{ fontSize: 24, fontWeight: 600 }}>{siteContent.profile.name}</div>
-          </div>
+        >
+          BS
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 22, maxWidth: 900, position: "relative" }}>
-          <div style={{ fontSize: 62, lineHeight: 1.05, fontWeight: 600 }}>
-            Payments, fintech, cloud architecture, and backend systems that need to stay reliable under pressure.
-          </div>
-          <div style={{ fontSize: 26, lineHeight: 1.5, color: "#c7d7e8" }}>
-            Java / Spring Boot / AWS / Microservices / Distributed Systems / Technical Leadership
-          </div>
+        <div style={{ display: "flex", fontSize: 22, color: "#a7b9bd" }}>
+          brunosalgado.dev
         </div>
       </div>
-    ),
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 82,
+            fontWeight: 700,
+            letterSpacing: -3,
+          }}
+        >
+          Bruno Salgado
+        </div>
+        <div style={{ display: "flex", fontSize: 32, marginTop: 14 }}>
+          Tech Lead & Senior Backend Engineer
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 14,
+          borderTop: "1px solid #476269",
+          paddingTop: 28,
+        }}
+      >
+        <div style={{ display: "flex", fontSize: 32, color: "#89d1b7" }}>
+          Java / Spring Boot / AWS
+        </div>
+        <div style={{ display: "flex", fontSize: 23, color: "#a7b9bd" }}>
+          Payments, fintech & distributed systems
+        </div>
+      </div>
+    </div>,
     size,
   );
 }

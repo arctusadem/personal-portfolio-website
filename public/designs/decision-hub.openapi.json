@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Architecture Decision Hub - API sketch",
+    "version": "0.1.0",
+    "description": "Design artifact, not a running API. Specifies the single command discussed in the study, not the complete proposed service. IDs and amounts are illustrative."
+  },
+  "paths": {
+    "/v1/decisions/{id}/transitions": {
+      "post": {
+        "operationId": "transitionDecision",
+        "summary": "Six months later, can the team still explain why a decision was made?",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Command"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transition recorded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Command": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action", "expectedRevision"],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["submit", "accept", "supersede"]
+          },
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "required": ["id", "status", "revision"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["in_review", "accepted", "superseded"]
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "required": ["status", "title"],
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "correlationId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Error401": {
+        "description": "Authentication required.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Error403": {
+        "description": "Identity is not permitted.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Error409": {
+        "description": "Idempotency conflict, stale revision or illegal state transition.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "Command fails domain validation.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,17 +1,21 @@
-"use client";
-
-import type { ReactNode } from "react";
-
+import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type RevealProps = {
+export function Reveal({
+  children,
+  className,
+  delay = 0,
+}: {
   children: ReactNode;
   className?: string;
   delay?: number;
-};
-
-export function Reveal({ children, className, delay = 0 }: RevealProps) {
-  void delay;
-
-  return <div className={cn(className)}>{children}</div>;
+}) {
+  return (
+    <div
+      className={cn("reveal", className)}
+      style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
+    >
+      {children}
+    </div>
+  );
 }

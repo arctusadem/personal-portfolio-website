@@ -1,305 +1,273 @@
-import { CheckCircle2, Globe2, Linkedin, Mail, Sparkles } from "lucide-react";
-
+import Link from "next/link";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  GitBranch,
+} from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { ArticleCard, ExperienceTimeline, ProjectCard, SummaryStrip } from "@/components/sections/content-cards";
-import { ButtonLink, Container, SectionHeading, StatGrid, StructuredData, Surface, Tag } from "@/components/ui/primitives";
-import { featuredArticles, featuredProjects, siteContent } from "@/lib/content";
+import { ProjectCard } from "@/components/sections/content-cards";
+import { ContactCTA } from "@/components/sections/contact-cta";
+import {
+  ButtonLink,
+  Container,
+  StructuredData,
+} from "@/components/ui/primitives";
+import { projects } from "@/lib/content";
+import { siteContent, profile } from "@/lib/profile";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Tech Lead / Senior Backend Engineer",
+  title: "Tech Lead & Senior Backend Engineer",
   description:
-    "Tech Lead and Senior Backend Engineer focused on Java, Spring Boot, AWS, payments, and distributed systems, with nearly 8 years across banking and fintech.",
+    "Bruno Salgado: 8+ years building Java, Spring Boot and AWS backends for banking, fintech and payments. Technical leadership and distributed systems.",
   path: "/",
-  keywords: [
-    "Bruno Salgado",
-    "Software Engineering Tech Lead",
-    "Senior Backend Engineer",
-    "Java Spring Boot AWS",
-    "Payments engineer",
-    "Canadian fintech roles",
-  ],
 });
 
-const summaryItems = [
-  {
-    title: "Java and Spring Boot delivery",
-    body: "Backend services, provider integrations, domain-heavy APIs, and the design discipline needed to keep complex systems understandable over time.",
-    icon: "network" as const,
-  },
-  {
-    title: "AWS modernization and platform thinking",
-    body: "Comfortable where cloud migration, CI/CD, observability, and reliability all need to move together without derailing product delivery.",
-    icon: "shield" as const,
-  },
-  {
-    title: "Payments and distributed systems fit",
-    body: "Especially strong for fintech, backend platform, and distributed-systems teams that need both implementation depth and technical leadership.",
-    icon: "calendar" as const,
-  },
-];
-
-const recruiterScan = [
-  ["Core stack", "Java, Spring Boot, AWS"],
-  ["Primary niche", "Payments, fintech, distributed systems"],
-  ["Current scope", "Tech Lead in cloud payments"],
-  ["Market fit", "Canada fintech and backend platform roles"],
-] as const;
+function EngineeringFocus() {
+  return (
+    <figure className="diagram-grid relative overflow-hidden rounded-3xl border border-[var(--border)] p-6 sm:p-8">
+      <figcaption className="mb-7 flex items-center justify-between gap-4">
+        <span className="eyebrow">Engineering focus</span>
+        <GitBranch aria-hidden className="size-4 text-[var(--accent)]" />
+      </figcaption>
+      <p className="mb-7 max-w-xs font-serif text-2xl leading-tight">
+        A payment crosses more than an API.
+      </p>
+      <ol className="space-y-0">
+        {[
+          ["01", "API contract", "Validate intent. Establish idempotency."],
+          ["02", "Domain & state", "Own the transition. Persist the evidence."],
+          [
+            "03",
+            "Provider boundary",
+            "Handle uncertainty. Reconcile the result.",
+          ],
+        ].map(([n, title, body], i) => (
+          <li key={n}>
+            <div className="diagram-node flex gap-4">
+              <span className="pt-1 font-mono text-xs text-[var(--accent)]">
+                {n}
+              </span>
+              <div>
+                <p className="text-sm font-semibold">{title}</p>
+                <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                  {body}
+                </p>
+              </div>
+            </div>
+            {i < 2 && (
+              <div className="ml-7 h-5 border-l border-[var(--border-strong)]" />
+            )}
+          </li>
+        ))}
+      </ol>
+      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[var(--muted)]">
+        {["Traceable", "Recoverable", "Explicit"].map((x) => (
+          <span key={x} className="inline-flex items-center gap-1.5">
+            <Check aria-hidden className="size-3 text-[var(--accent)]" />
+            {x}
+          </span>
+        ))}
+      </div>
+    </figure>
+  );
+}
 
 export default function HomePage() {
-  const structuredData = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: siteContent.profile.name,
-      jobTitle: siteContent.profile.role,
-      url: siteContent.profile.siteUrl,
-      sameAs: [siteContent.profile.linkedinUrl, siteContent.profile.githubUrl],
-      email: siteContent.profile.email,
-      knowsAbout: [
-        "Java",
-        "Spring Boot",
-        "AWS",
-        "CloudFormation",
-        "CodePipeline",
-        "Payments",
-        "Banking systems",
-        "Distributed systems",
-        "Technical leadership",
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: `${siteContent.profile.name} Portfolio`,
-      url: siteContent.profile.siteUrl,
-      description: siteContent.hero.supportingText,
-    },
-  ];
-
   return (
     <>
-      <StructuredData data={structuredData} />
-
-      <section className="pt-14 sm:pt-18 lg:pt-22">
-        <Container className="space-y-8">
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)] xl:items-end">
-            <Reveal className="space-y-8">
-              <div className="space-y-6">
-                <Tag>{siteContent.hero.eyebrow}</Tag>
-                <div className="space-y-4">
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
-                    {siteContent.hero.subheadline}
-                  </p>
-                  <h1 className="max-w-5xl text-pretty font-serif text-5xl tracking-tight text-[var(--foreground)] sm:text-6xl lg:text-7xl">
-                    {siteContent.hero.headline}
-                  </h1>
-                  <p className="max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg">
-                    {siteContent.hero.supportingText}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <ButtonLink href="/projects">View case studies</ButtonLink>
-                  <ButtonLink href="/resume" variant="secondary">
-                    Open resume
-                  </ButtonLink>
-                  <ButtonLink external href={siteContent.profile.linkedinUrl} variant="ghost">
-                    LinkedIn
-                  </ButtonLink>
-                  <ButtonLink external href={siteContent.profile.githubUrl} variant="ghost">
-                    GitHub
-                  </ButtonLink>
-                </div>
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: profile.name,
+          jobTitle: profile.role,
+          url: absoluteUrl("/"),
+          sameAs: [profile.linkedinUrl, profile.githubUrl],
+          knowsAbout: [
+            "Java",
+            "Spring Boot",
+            "AWS",
+            "Payments",
+            "Distributed systems",
+            "Technical leadership",
+          ],
+        }}
+      />
+      <section className="pb-12 pt-10 sm:pb-16 sm:pt-16 lg:pt-20">
+        <Container>
+          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+            <Reveal className="min-w-0 space-y-6">
+              <p className="eyebrow">{siteContent.hero.eyebrow}</p>
+              <h1 className="hero-title">{siteContent.hero.headline}</h1>
+              <div
+                className="flex flex-wrap gap-5"
+                aria-label="Core technologies"
+              >
+                {["Java", "Spring Boot", "AWS"].map((x) => (
+                  <span className="hero-stack" key={x}>
+                    {x}
+                  </span>
+                ))}
               </div>
+              <p className="max-w-lg text-lg leading-7 text-[var(--foreground)]">
+                Payments, fintech and distributed systems.
+              </p>
+              <p className="max-w-lg text-sm leading-7 text-[var(--muted)]">
+                {siteContent.hero.supportingText}
+              </p>
               <div className="flex flex-wrap gap-3">
-                <span className="hero-chip">
-                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> Java and Spring Boot backend services
-                </span>
-                <span className="hero-chip">
-                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> AWS modernization, CloudFormation, CI/CD
-                </span>
-                <span className="hero-chip">
-                  <CheckCircle2 className="size-4 text-[var(--accent)]" /> Payments, provider integrations, distributed systems
-                </span>
+                <ButtonLink href="/experience">
+                  Explore my experience
+                </ButtonLink>
+                <ButtonLink href="/resume" variant="secondary">
+                  View resume
+                </ButtonLink>
               </div>
+              <p className="max-w-md text-xs leading-6 text-[var(--muted)]">
+                {siteContent.hero.availability}
+              </p>
             </Reveal>
+            <Reveal delay={0.12}>
+              <EngineeringFocus />
+            </Reveal>
+          </div>
+          <div className="mt-12 flex flex-wrap items-center justify-between gap-5 border-t border-[var(--border)] pt-6">
+            <p className="text-xs text-[var(--muted)]">
+              Experience across banking & fintech
+            </p>
+            <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-semibold sm:text-base">
+              <span>Itau Unibanco</span>
+              <span>PROFIT Business Bank</span>
+              <span>Cloud Payments</span>
+            </div>
+            <a href="#selected-work" className="text-link text-xs">
+              Selected work
+              <ArrowDown aria-hidden className="size-3.5" />
+            </a>
+          </div>
+        </Container>
+      </section>
 
-            <Reveal delay={0.1}>
-              <Surface className="overflow-hidden p-6 md:p-8">
-                <div className="space-y-6">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-[var(--muted)]">
-                      <Sparkles className="size-4.5 text-[var(--accent)]" />
-                      <p className="text-xs font-semibold uppercase tracking-[0.22em]">Recruiter quick scan</p>
-                    </div>
-                    <p className="text-2xl font-serif text-[var(--foreground)]">
-                      Senior backend depth with real banking, payments, and AWS delivery history.
+      <section
+        id="selected-work"
+        className="section border-t border-[var(--border)]"
+      >
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.5fr] lg:gap-20">
+            <div className="space-y-5">
+              <p className="eyebrow">Professional experience</p>
+              <h2 className="font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+                Close to the code.
+                <br />
+                Accountable for the system.
+              </h2>
+              <p className="text-sm leading-7 text-[var(--muted)]">
+                My work connects implementation detail with the architecture and
+                operational decisions around it.
+              </p>
+              <Link className="text-link text-sm" href="/experience">
+                Full career history
+                <ArrowRight aria-hidden className="size-4" />
+              </Link>
+            </div>
+            <div className="divide-y divide-[var(--border)]">
+              {siteContent.recruiterSignals.map((item, i) => (
+                <div
+                  key={item.title}
+                  className="grid grid-cols-[2rem_1fr] gap-4 py-6 first:pt-0 last:pb-0"
+                >
+                  <span className="pt-1 font-mono text-xs text-[var(--accent)]">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                      {item.body}
                     </p>
                   </div>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {recruiterScan.map(([label, value]) => (
-                      <div key={label} className="rounded-2xl border border-[var(--border)] bg-[var(--background)]/70 p-4">
-                        <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">{label}</p>
-                        <p className="mt-2 text-sm font-semibold leading-6 text-[var(--foreground)]">{value}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--background)]/70 p-5">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">signal.log</p>
-                    <div className="mt-3 space-y-2 font-mono text-xs leading-6 text-[var(--muted)] sm:text-[13px]">
-                      <p>stack.primary = ["Java", "Spring Boot", "AWS"]</p>
-                      <p>domains = ["banking", "payments", "fintech"]</p>
-                      <p>platform.focus = ["CloudFormation", "CodePipeline", "Kubernetes"]</p>
-                      <p>systems.mode = "distributed"</p>
-                      <p>trace.level = 0x06</p>
-                    </div>
-                  </div>
-                  <div className="rounded-3xl border border-dashed border-[var(--accent)]/35 bg-[var(--accent-soft)]/35 p-5">
-                    <div className="flex flex-wrap items-start gap-4">
-                      <div className="space-y-2">
-                        <p className="text-sm font-semibold text-[var(--foreground)]">Open to the right backend and platform conversations</p>
-                        <p className="text-sm leading-7 text-[var(--muted)]">{siteContent.hero.availability}</p>
-                      </div>
-                      <div className="ml-auto flex gap-2">
-                        <a className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)]" href={siteContent.profile.linkedinUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                          <Linkedin className="size-4.5" />
-                        </a>
-                        <a className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)]" href={`mailto:${siteContent.profile.email}`} aria-label="Email">
-                          <Mail className="size-4.5" />
-                        </a>
-                        <a className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)]" href={absoluteUrl("/")} aria-label="Website URL">
-                          <Globe2 className="size-4.5" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </Surface>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.16}>
-            <StatGrid items={siteContent.metrics} />
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="py-16 sm:py-20">
-        <Container className="space-y-10">
-          <Reveal>
-            <SummaryStrip items={summaryItems} />
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="pb-16 sm:pb-20">
-        <Container className="space-y-10">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Where Bruno Adds Value"
-              title="A backend profile shaped by regulated systems, payments complexity, and architecture-minded delivery."
-              description="The clearest signal is the combination of Java and Spring Boot depth, AWS modernization work, provider-heavy integration experience, and hands-on technical leadership."
-            />
-          </Reveal>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {siteContent.recruiterSignals.map((signal, index) => (
-              <Reveal key={signal.title} delay={0.05 * index}>
-                <Surface className="h-full p-6">
-                  <div className="space-y-4">
-                    <span className="inline-flex size-10 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent)]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-[var(--foreground)]">{signal.title}</h3>
-                      <p className="text-sm leading-7 text-[var(--muted)]">{signal.body}</p>
-                    </div>
-                  </div>
-                </Surface>
-              </Reveal>
-            ))}
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
-      <section className="pb-16 sm:pb-20">
-        <Container className="space-y-10">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Portfolio Case Studies"
-              title="Reference implementations built to support technical review, not just portfolio browsing."
-              description="Each project exposes architecture boundaries, interface design, operational concerns, and trade-offs so recruiters and engineering leaders can assess the depth behind the headline."
-            />
-          </Reveal>
+      <section className="section">
+        <Container className="space-y-8">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-2xl space-y-4">
+              <p className="eyebrow">Engineering studies</p>
+              <h2 className="font-serif text-3xl tracking-tight sm:text-4xl">
+                A closer look at the decisions.
+              </h2>
+              <p className="text-sm leading-7 text-[var(--muted)]">
+                Independent architecture studies with interactive models and API
+                contracts. Each explores a specific design problem, its failure
+                cases and its trade-offs.
+              </p>
+            </div>
+            <Link className="text-link text-sm" href="/projects">
+              All case studies
+              <ArrowRight aria-hidden className="size-4" />
+            </Link>
+          </div>
           <div className="space-y-5">
-            {featuredProjects.map((project, index) => (
-              <Reveal key={project.slug} delay={0.08 * index}>
-                <ProjectCard project={project} />
-              </Reveal>
+            {projects.map((project, index) => (
+              <ProjectCard project={project} index={index} key={project.slug} />
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="pb-16 sm:pb-20">
-        <Container className="space-y-10">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Career History"
-              title="Experience across Brazilian banking, US fintech, and current Tech Lead work in cloud payments."
-              description="The career arc explains the blend of strengths on the rest of the site: regulated-system discipline, provider integrations, AWS modernization, and backend leadership under real delivery pressure."
-            />
-          </Reveal>
-          <Reveal delay={0.06}>
-            <ExperienceTimeline items={siteContent.experience.roles} />
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="pb-16 sm:pb-20">
-        <Container className="space-y-10">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Posts"
-              title="Featured posts and one small hidden-features guide."
-              description="Short-form activity lives on LinkedIn, and the site keeps one small easter-egg post for people who like poking around."
-            />
-          </Reveal>
-          <div className="grid gap-4 xl:grid-cols-3">
-            {featuredArticles.map((article, index) => (
-              <Reveal key={article.slug} delay={0.06 * index}>
-                <ArticleCard article={article} />
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="pb-20 sm:pb-24">
+      <section className="section">
         <Container>
-          <Reveal>
-            <Surface className="overflow-hidden p-8 md:p-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-                <div className="space-y-4">
-                  <Tag>Open to conversation</Tag>
-                  <h2 className="max-w-3xl text-pretty font-serif text-3xl tracking-tight text-[var(--foreground)] sm:text-4xl">
-                    Open to Senior Backend Engineer and Tech Lead opportunities in Canada across fintech, payments, backend platform, and distributed systems teams.
-                  </h2>
-                  <p className="max-w-2xl text-base leading-8 text-[var(--muted)]">
-                    If the role involves Java, Spring Boot, AWS modernization, payment infrastructure, partner integrations, or technical leadership in backend-heavy teams, Bruno is likely a strong fit.
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+            <div className="space-y-5">
+              <p className="eyebrow">How I work</p>
+              <h2 className="font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+                Good technical direction makes the next decision easier.
+              </h2>
+              <p className="text-sm leading-7 text-[var(--muted)]">
+                I care about clear ownership, written trade-offs and delivery
+                plans grounded in the actual system. I mentor through
+                implementation and keep architecture connected to what the team
+                can operate.
+              </p>
+              <Link href="/about" className="text-link text-sm">
+                More about me
+                <ArrowRight aria-hidden className="size-4" />
+              </Link>
+            </div>
+            <div className="space-y-0 divide-y divide-[var(--border)]">
+              {siteContent.about.philosophy.map((item) => (
+                <div className="py-5 first:pt-0" key={item.title}>
+                  <h3 className="font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                    {item.body}
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-3 lg:justify-end">
-                  <ButtonLink href="/contact">Start a conversation</ButtonLink>
-                  <ButtonLink href="/resume" variant="secondary">
-                    Open resume
-                  </ButtonLink>
-                </div>
-              </div>
-            </Surface>
-          </Reveal>
+              ))}
+            </div>
+          </div>
+          <div className="mt-10 flex flex-wrap justify-between gap-4 border-t border-[var(--border)] pt-6 text-sm">
+            <p className="text-[var(--muted)]">
+              Occasional thoughts on engineering and the work around it.
+            </p>
+            <Link href="/writing" className="text-link">
+              Posts & field notes
+              <ArrowUpRight aria-hidden className="size-4" />
+            </Link>
+          </div>
+        </Container>
+      </section>
+      <section className="pb-16">
+        <Container>
+          <ContactCTA />
         </Container>
       </section>
     </>
   );
 }
-

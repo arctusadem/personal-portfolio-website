@@ -21,9 +21,11 @@ export type Highlight = {
 export type ExperienceItem = {
   period: string;
   title: string;
-  subtitle: string;
+  company: string;
   summary: string;
   outcomes: string[];
+  location: string;
+  stack: string[];
 };
 
 export type SkillCategory = {
@@ -38,6 +40,7 @@ export type PhilosophyPoint = {
 };
 
 export type SiteContent = {
+  updatedAt: string;
   profile: {
     name: string;
     role: string;
@@ -76,55 +79,31 @@ export type SiteContent = {
   };
 };
 
-export type ArchitectureLayer = {
-  name: string;
-  details: string;
-};
-
-export type ProjectFeature = {
-  title: string;
-  body: string;
-};
-
-export type Decision = {
-  title: string;
-  body: string;
-};
-
-export type ProjectScreen = {
-  title: string;
-  caption: string;
-};
-
+export type StudyNode = { name: string; details: string };
 export type Project = {
   slug: string;
+  directory: "payment-orchestration" | "money-movement" | "decision-hub";
   title: string;
   category: string;
   strapline: string;
   excerpt: string;
-  audience: string;
-  year: string;
-  status: string;
-  role: string;
   stack: string[];
-  heroMetrics: Metric[];
-  context: string;
-  problem: string[];
-  approach: string[];
-  features: ProjectFeature[];
-  proofArtifacts: ProjectFeature[];
-  interfaces: ProjectFeature[];
-  operationalConcerns: ProjectFeature[];
-  architecture: {
-    summary: string;
-    layers: ArchitectureLayer[];
-    decisions: Decision[];
-  };
-  screens: ProjectScreen[];
-  tradeoffs: string[];
-  outcomes: string[];
+  principle: string;
+  question: string;
+  problem: string;
+  approach: string;
+  flow: StudyNode[];
+  durableBoundary: string;
+  asyncBoundary: string;
+  decisions: Array<{ title: string; choice: string; cost: string }>;
+  operations: Array<{ title: string; body: string }>;
+  demo: { title: string; description: string; limitation: string };
+  endpoint: string;
+  request: string;
+  response: string;
+  outcome: string;
   next: string[];
-  repoStructure: string[];
+  sources: SocialLink[];
 };
 
 export type ArticleSection = {
@@ -151,4 +130,3 @@ export type SocialPost = {
   height: number;
   sourceUrl: string;
 };
-

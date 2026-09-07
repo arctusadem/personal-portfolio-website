@@ -1,10 +1,9 @@
 import articlesData from "@/content/articles.json";
 import projectsData from "@/content/projects.json";
-import siteData from "@/content/site.json";
 import socialPostsData from "@/content/social-posts.json";
-import type { Article, Project, SiteContent, SocialPost } from "@/types/content";
+import type { Article, Project, SocialPost } from "@/types/content";
 
-export const siteContent = siteData as SiteContent;
+export { siteContent } from "@/lib/profile";
 export const projects = projectsData as Project[];
 export const articles = articlesData as Article[];
 export const socialPosts = socialPostsData as SocialPost[];

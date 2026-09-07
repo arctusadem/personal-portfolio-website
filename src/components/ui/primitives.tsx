@@ -13,7 +13,9 @@ type ContainerProps = {
 
 export function Container({ children, className }: ContainerProps) {
   return (
-    <div className={cn("mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8", className)}>
+    <div
+      className={cn("mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8", className)}
+    >
       {children}
     </div>
   );
@@ -37,26 +39,29 @@ export function ButtonLink({
   withIcon = true,
 }: ButtonLinkProps) {
   const baseClassName =
-    "inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]";
+    "inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold leading-5 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]";
 
   const variantClassName = {
     primary:
       "bg-[var(--foreground)] text-[var(--background)] shadow-[0_12px_30px_-18px_var(--shadow-color)] hover:-translate-y-0.5 hover:bg-[var(--foreground-strong)]",
     secondary:
       "border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground)] hover:border-[var(--accent)] hover:bg-[var(--surface-strong)]",
-    ghost:
-      "text-[var(--foreground)] hover:bg-[var(--surface)]",
+    ghost: "text-[var(--foreground)] hover:bg-[var(--surface)]",
   };
 
-  const icon = external ? <ArrowUpRight className="size-4" /> : <ArrowRight className="size-4" />;
+  const icon = external ? (
+    <ArrowUpRight aria-hidden className="size-4 shrink-0" />
+  ) : (
+    <ArrowRight aria-hidden className="size-4 shrink-0" />
+  );
 
-  if (external) {
+  if (external || /^(mailto:|tel:|#|https?:)/.test(href)) {
     return (
       <a
         className={cn(baseClassName, variantClassName[variant], className)}
         href={href}
-        target="_blank"
-        rel="noreferrer"
+        target={external && /^https?:/.test(href) ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
       >
         {children}
         {withIcon ? icon : null}
@@ -65,7 +70,10 @@ export function ButtonLink({
   }
 
   return (
-    <Link className={cn(baseClassName, variantClassName[variant], className)} href={href as Route}>
+    <Link
+      className={cn(baseClassName, variantClassName[variant], className)}
+      href={href as Route}
+    >
       {children}
       {withIcon ? icon : null}
     </Link>
@@ -99,7 +107,7 @@ export function Surface({ children, className }: SurfaceProps) {
   return (
     <div
       className={cn(
-        "rounded-[2rem] border border-[var(--border)] bg-[var(--surface)]/95 shadow-[0_25px_60px_-40px_var(--shadow-color)] backdrop-blur-xl",
+        "min-w-0 rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-[0_14px_40px_-32px_var(--shadow-color)]",
         className,
       )}
     >
@@ -121,13 +129,14 @@ export function SectionHeading({
   description,
   align = "left",
 }: SectionHeadingProps) {
-  const alignment = align === "center" ? "text-center items-center" : "text-left items-start";
+  const alignment =
+    align === "center" ? "text-center items-center" : "text-left items-start";
 
   return (
     <div className={cn("flex max-w-3xl flex-col gap-4", alignment)}>
       <Tag>{eyebrow}</Tag>
       <div className="space-y-3">
-        <h2 className="max-w-3xl text-pretty font-serif text-3xl tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
+        <h2 className="max-w-3xl text-pretty font-serif text-3xl tracking-tight text-[var(--foreground)] sm:text-4xl">
           {title}
         </h2>
         {description ? (
@@ -147,9 +156,19 @@ type PageIntroProps = {
   aside?: ReactNode;
 };
 
-export function PageIntro({ eyebrow, title, description, aside }: PageIntroProps) {
+export function PageIntro({
+  eyebrow,
+  title,
+  description,
+  aside,
+}: PageIntroProps) {
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+    <div
+      className={cn(
+        "grid gap-8",
+        Boolean(aside) && "lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end",
+      )}
+    >
       <div className="space-y-4">
         <Tag>{eyebrow}</Tag>
         <div className="space-y-4">
@@ -180,7 +199,9 @@ export function StatGrid({ items, className }: StatGridProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
               {item.label}
             </p>
-            <p className="text-xl font-semibold text-[var(--foreground)]">{item.value}</p>
+            <p className="text-xl font-semibold text-[var(--foreground)]">
+              {item.value}
+            </p>
           </div>
         </Surface>
       ))}
@@ -197,10 +218,8 @@ export function StructuredData({ data }: StructuredDataProps) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
       }}
     />
   );
 }
-
-
