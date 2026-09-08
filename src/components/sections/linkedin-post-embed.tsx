@@ -15,7 +15,7 @@ export function LinkedInPostEmbed({ post }: { post: SocialPost }) {
           style={{ minHeight: `${post.height}px` }}
           frameBorder="0"
           allowFullScreen
-          loading="eager"
+          loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>

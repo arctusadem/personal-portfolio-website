@@ -52,10 +52,25 @@ test("project URLs are unique and each study has source and a contract", async (
   }
 });
 test("embedded posts point only to the intended LinkedIn embed origin", () => {
+  assert.ok(posts.length > 0);
+  assert.equal(new Set(posts.map((post) => post.slug)).size, posts.length);
+  assert.equal(new Set(posts.map((post) => post.embedUrl)).size, posts.length);
+  assert.equal(new Set(posts.map((post) => post.sourceUrl)).size, posts.length);
   for (const post of posts) {
     const url = new URL(post.embedUrl);
     assert.equal(url.origin, "https://www.linkedin.com");
-    assert.ok(url.pathname.startsWith("/embed/feed/update/"));
+    assert.match(
+      url.pathname,
+      /^\/embed\/feed\/update\/urn:li:(share|ugcPost):\d+$/,
+    );
+    const source = new URL(post.sourceUrl);
+    assert.equal(source.origin, "https://www.linkedin.com");
+    assert.match(
+      source.pathname,
+      /^\/feed\/update\/urn:li:(activity|share|ugcPost):\d+\/$/,
+    );
+    assert.ok(post.title.trim());
+    assert.ok(Number.isInteger(post.height));
     assert.ok(post.height >= 400 && post.height <= 3000);
   }
 });

@@ -57,6 +57,8 @@ Most pages are Server Components. Only interactive controls use client state. Th
 - `src/lib/seo.ts`: consistent canonical, title, Open Graph and Twitter metadata.
 - `app/opengraph-image.tsx`: the 1200 x 630 sharing image.
 
+To feature another post, use LinkedIn's **Embed this post > Embed full post** option. Copy the exact embed URL and height into `social-posts.json`, along with a unique slug, descriptive title and the direct post link. The embed ID can differ from the activity ID in the direct link; do not substitute one for the other. Posts display in file order, newest selections first. Off-screen frames load lazily, and every post retains its direct LinkedIn link.
+
 Use the same verified dates and job titles as the resume and LinkedIn. Do not add unverified performance metrics or describe a proposed service as implemented. Proposed backend stacks and the actual TypeScript models are deliberately labelled separately.
 
 The resume page uses the same career data and supports Print / Save PDF. It is a portfolio career summary, not a replacement for an independently maintained application resume.
