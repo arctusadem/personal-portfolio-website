@@ -1,188 +1,271 @@
 {
   "profile": {
     "name": "Bruno Salgado",
-    "role": "Software Engineering Tech Lead / Senior Backend Engineer",
-    "location": "Langley, BC, Canada",
+    "role": "Tech Lead / Senior Backend Engineer",
+    "location": "Greater Vancouver, Canada",
     "email": "brunocrsalgado@gmail.com",
     "siteUrl": "https://brunosalgado.dev",
     "linkedinUrl": "https://www.linkedin.com/in/bruno-cesar-rocha-salgado/",
     "githubUrl": "https://github.com/arctusadem"
   },
   "navigation": [
-    { "label": "About", "href": "/about" },
-    { "label": "Experience", "href": "/experience" },
-    { "label": "Projects", "href": "/projects" },
-    { "label": "Skills", "href": "/skills" },
-    { "label": "Posts", "href": "/writing" },
-    { "label": "Contact", "href": "/contact" }
+    {
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "label": "Experience",
+      "href": "/experience"
+    },
+    {
+      "label": "Projects",
+      "href": "/projects"
+    },
+    {
+      "label": "Stack",
+      "href": "/skills"
+    },
+    {
+      "label": "Posts",
+      "href": "/writing"
+    }
   ],
   "hero": {
-    "eyebrow": "Tech Lead / Payments / AWS Modernization",
-    "headline": "Fintech backend engineering with real banking, payments, and cloud modernization depth.",
-    "supportingText": "Bruno Salgado is a software engineering tech lead and senior backend engineer with nearly 8 years of experience across Brazilian banking and US fintech. His background spans Java and Spring Boot services, regulated financial systems, AWS modernization, provider integrations, and the delivery discipline needed to keep complex platforms moving.",
-    "availability": "Open to Senior Backend Engineer and Tech Lead opportunities in Canada, especially fintech, platform, and distributed systems roles."
+    "eyebrow": "Tech Lead & Senior Backend Engineer",
+    "headline": "Reliable systems.\nFrom code to production.",
+    "subheadline": "Java, Spring Boot and AWS for payments, fintech and distributed systems.",
+    "supportingText": "I'm Bruno. I bring 8+ years of backend engineering across banking and fintech, with hands-on technical leadership from architecture decisions to production troubleshooting.",
+    "availability": "Open to senior backend and Tech Lead opportunities in Canada."
   },
   "recruiterSignals": [
     {
-      "title": "Banking and fintech track record",
-      "body": "Experience across Itau Unibanco, PROFIT Business Bank, and Cloud Payments, covering regulated banking systems, financial reporting, partner-heavy fintech platforms, and current Tech Lead scope."
+      "title": "Payment integrations",
+      "body": "Java and Spring Boot services connecting banking, card and crypto providers. Clear contracts, explicit transaction states and careful handling of asynchronous callbacks."
     },
     {
-      "title": "AWS modernization depth",
-      "body": "Hands-on delivery across AWS and container platforms, including CloudFormation, CodePipeline, Kubernetes, Docker, and the practical work of moving systems away from older on-prem operating models."
+      "title": "Cloud modernization",
+      "body": "Moving established systems toward AWS and container-based delivery, with attention to migration sequencing, CI/CD and operational continuity."
     },
     {
-      "title": "Payments and partner integrations",
-      "body": "Built Java and Spring Boot services for banking, crypto, and card-provider integrations, with strong attention to data accuracy, resilience, and operational clarity."
-    },
-    {
-      "title": "Tech lead execution",
-      "body": "Currently leading technical execution across parallel initiatives, validating architecture decisions, surfacing risks early, and helping teams deliver under real timeline pressure."
+      "title": "Technical direction",
+      "body": "Architecture reviews, ownership boundaries and delivery planning. I stay close to implementation and help teams resolve risk before it becomes expensive."
     }
   ],
   "metrics": [
-    { "label": "Backend experience", "value": "Nearly 8 years" },
-    { "label": "Current role", "value": "Software Engineering Tech Lead" },
-    { "label": "Domain scope", "value": "Banking, payments, crypto and cards" },
-    { "label": "Cloud track record", "value": "AWS modernization and CI/CD" }
+    {
+      "label": "Experience",
+      "value": "8+ years"
+    },
+    {
+      "label": "Core stack",
+      "value": "Java / Spring Boot / AWS"
+    },
+    {
+      "label": "Domain",
+      "value": "Banking & payments"
+    }
   ],
   "about": {
     "intro": [
-      "I grew up technically in regulated banking and then spent the last several years in fintech and payments. That combination shaped how I think: correctness first, clear service boundaries, and enough operational visibility that people can trust the system when something goes wrong.",
-      "At Itau Unibanco, I worked on backend services, regulatory tooling, and modernization work in a large banking environment. Later, in US fintech roles, I moved deeper into Java and Spring Boot APIs, provider integrations, and the delivery realities of platforms that have to balance speed, compliance, and reliability.",
-      "Today I work as a Software Engineering Tech Lead, which means I still care about code and system design, but I also spend time validating architecture, reducing delivery risk, and helping teams move through complex work without losing clarity."
+      "My career started at Itau Unibanco, working on risk and regulatory systems. In banking, the quality of a change includes whether someone can explain it, trace it and safely recover from it. That has stayed with me.",
+      "I moved into fintech to work closer to products and external integrations. At PROFIT Business Bank and Cloud Payments, I built financial reporting services and Java APIs connecting banking, crypto and card providers.",
+      "As a Tech Lead, I still work through implementation details. I also help teams decide where responsibilities belong, which failure cases matter, and how to deliver changes without making the next release harder."
     ],
     "philosophy": [
       {
-        "title": "Make the system explain itself",
-        "body": "If support, finance, and engineers cannot reconstruct what happened, the design is incomplete. Good backend work makes state, failure paths, and ownership easier to understand."
+        "title": "Make state explicit",
+        "body": "A timeout is not a declined payment. I prefer clear state transitions, stable identifiers and enough history to reconstruct what actually happened."
       },
       {
-        "title": "Tie architecture to delivery",
-        "body": "Design only becomes valuable when it helps a team execute. I like architecture that shortens ambiguity, improves rollout safety, and gives people clearer decision boundaries."
+        "title": "Keep boundaries useful",
+        "body": "A service boundary should clarify ownership and change. I challenge abstractions that add coordination without making the system easier to maintain."
       },
       {
-        "title": "Be pragmatic about modernization",
-        "body": "Moving from legacy or on-prem patterns to cloud platforms is rarely a clean rewrite story. The real work is sequencing change safely while still improving the platform underneath."
+        "title": "Design the recovery path",
+        "body": "Retries, reconciliation and operational visibility belong in the design discussion. Recovery should be a procedure the team understands."
       }
     ],
     "strengths": [
       {
-        "title": "Payments and financial backends",
-        "body": "Java and Spring Boot services for regulated environments, provider integrations, financial reporting, transaction flows, and correctness-sensitive APIs."
+        "title": "Financial systems",
+        "body": "Payment integrations, data consistency, transaction lifecycle design and regulated banking workflows."
       },
       {
-        "title": "AWS and platform execution",
-        "body": "Comfortable with AWS, CloudFormation, CodePipeline, Kubernetes, Docker, OpenShift, and the operational details that determine whether a service is genuinely production-ready."
+        "title": "Cloud delivery",
+        "body": "AWS, Kubernetes, Docker, infrastructure as code and the practical work of modernizing established services."
       },
       {
-        "title": "Technical leadership in delivery",
-        "body": "Strong in design review, risk identification, execution discipline, and helping teams make architecture decisions that hold up under deadline pressure."
+        "title": "Team execution",
+        "body": "Design reviews, mentoring, technical escalation and translating business needs into a manageable delivery plan."
       }
     ],
     "leadership": [
-      "My leadership style is practical. I like design reviews that actually help, trade-off conversations that stay concrete, and technical direction that reduces churn for the team.",
-      "That means validating architecture against delivery reality, being a senior escalation point when complexity spikes, and keeping the system understandable enough that engineers can move without guessing.",
-      "I care about reliability and maintainability, but I also care about pace. The best backend leadership balances technical quality with momentum."
+      "I like design reviews that end with a decision, a reason and a clear owner. Written trade-offs make it easier for engineers to move independently.",
+      "When an integration fails, I follow the request across boundaries and work back from evidence. The fix should improve the team's understanding of the system, too.",
+      "I work with engineering, product and external partners to make the constraints explicit. That makes delivery plans more useful and surprises less frequent."
     ]
   },
   "experience": {
     "intro": [
-      "Bruno's career path runs from Brazilian banking and regulatory work into US fintech, cloud payments, and current Tech Lead responsibility.",
-      "That path matters because it explains the blend of skills on the rest of the site: regulated-system discipline, payments and partner integrations, AWS modernization, and hands-on technical leadership."
+      "From risk and regulatory systems in Brazilian banking to payment integrations and technical leadership in fintech.",
+      "My work spans service implementation, cloud modernization and the decisions that keep delivery and operations manageable."
     ],
     "roles": [
       {
         "period": "Jan 2025 - Present",
-        "title": "Cloud Payments EU/UK, USA",
-        "subtitle": "Software Engineering Tech Lead",
-        "summary": "Owning technical execution across multiple parallel initiatives in a payments environment, with responsibility for architecture validation, delivery clarity, and reducing implementation risk under tight timelines.",
+        "title": "Software Engineering Tech Lead",
+        "location": "EU / UK initiatives",
+        "summary": "Technical direction and hands-on delivery across payments initiatives, with responsibility for architecture review, integration boundaries and delivery risk.",
         "outcomes": [
-          "Align architecture, scope, and delivery sequencing across concurrent initiatives so teams can move without creating hidden technical debt.",
-          "Validate design decisions for scalability, reliability, and maintainability before they become expensive downstream constraints.",
-          "Act as a senior escalation point for difficult technical issues and lead design reviews that keep execution disciplined under pressure."
-        ]
+          "Align service ownership and implementation sequencing across concurrent initiatives so dependencies are explicit before development starts.",
+          "Review designs for failure handling, data consistency and maintainability, connecting architecture decisions to delivery constraints.",
+          "Work through technical escalations with engineers and external partners, bringing implementation findings back into the design."
+        ],
+        "stack": [
+          "Java",
+          "Spring Boot",
+          "AWS",
+          "Kubernetes",
+          "Payment integrations"
+        ],
+        "company": "Cloud Payments"
       },
       {
         "period": "Jul 2022 - Dec 2024",
-        "title": "Cloud Payments, USA",
-        "subtitle": "Java Developer",
-        "summary": "Built Java and Spring Boot APIs for a fintech platform integrating with banking, crypto, and card providers, with strong emphasis on resilience, edge-case handling, and controlled delivery in Kubernetes environments.",
+        "title": "Java Developer",
+        "location": "United States",
+        "summary": "Java and Spring Boot APIs for a fintech platform connecting banking, crypto and card providers.",
         "outcomes": [
-          "Designed and implemented provider-facing APIs integrating with Circle, Fireblocks, and Ibanera across payment and financial platform workflows.",
-          "Worked closely with architects and senior engineers to challenge designs, surface failure paths, and improve platform resilience before release.",
-          "Reinforced quality through code review, automated testing, and CI/CD discipline in containerized delivery pipelines."
-        ]
+          "Implemented provider integrations with Circle, Fireblocks and Ibanera across financial workflows.",
+          "Worked with architects and engineers to identify failure paths and improve error handling around external services.",
+          "Supported reliable releases through automated testing, code review and CI/CD in Kubernetes environments."
+        ],
+        "stack": ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Kubernetes"],
+        "company": "Cloud Payments"
       },
       {
         "period": "Mar 2022 - Jun 2022",
-        "title": "PROFIT Business Bank, USA",
-        "subtitle": "Java Spring Developer",
-        "summary": "Delivered backend services for business-banking reporting features in a short but concrete financial-systems role where data consistency and correctness mattered more than speed alone.",
+        "title": "Java Spring Developer",
+        "location": "United States",
+        "summary": "Backend services for business-banking financial reporting.",
         "outcomes": [
-          "Built backend services supporting core financial reporting capabilities, including cash flow statements for business customers.",
-          "Implemented APIs and asynchronous processing components with strong attention to data accuracy and consistency.",
-          "Contributed in a domain where financial output quality and operational trust were non-negotiable."
-        ]
+          "Built services supporting cash flow statements and reporting workflows for business customers.",
+          "Implemented APIs and asynchronous processing with attention to consistency and correctness of financial output."
+        ],
+        "stack": ["Java", "Spring Boot", "REST APIs", "Financial reporting"],
+        "company": "PROFIT Business Bank"
       },
       {
         "period": "Feb 2019 - Dec 2021",
-        "title": "Itau Unibanco Bank, Brazil",
-        "subtitle": "Software Engineer",
-        "summary": "Worked inside a large-scale regulated banking environment on backend services, REST APIs, market-risk tooling, and modernization efforts spanning both cloud and on-prem delivery pipelines.",
+        "title": "Software Engineer",
+        "location": "Brazil",
+        "summary": "Backend services, market-risk tooling and modernization in a regulated banking environment.",
         "outcomes": [
-          "Developed backend services and REST APIs in a high-compliance banking environment where delivery quality and traceability both mattered.",
-          "Supported cloud and on-prem CI/CD pipelines while balancing delivery velocity with governance and operational constraints.",
-          "Contributed to legacy migrations as well as market risk and regulatory reporting tools that needed reliability and careful change management."
-        ]
+          "Developed backend services and REST APIs supporting risk and regulatory workflows.",
+          "Contributed to on-premises to AWS modernization and supported delivery through cloud and on-premises CI/CD pipelines.",
+          "Worked with Kafka and AWS messaging, SQL and financial reporting systems where traceability and controlled changes mattered."
+        ],
+        "stack": ["Java", "AWS", "Kafka", "SQS / SNS", "SQL", "CI/CD"],
+        "company": "Itau Unibanco"
       },
       {
         "period": "Jul 2017 - Jan 2019",
-        "title": "Itau Unibanco Bank, Brazil",
-        "subtitle": "Intern",
-        "summary": "Started in banking software through risk and regulatory work, building the foundations in data, backend logic, and careful systems thinking that shaped the rest of Bruno's career.",
+        "title": "Intern",
+        "location": "Brazil",
+        "summary": "Software development supporting risk metrics and regulatory reporting.",
         "outcomes": [
-          "Helped build a C# system for Brazilian Central Bank risk metrics required by a formal regulatory demand.",
-          "Worked on SQL database management, including query, procedure, and function optimization.",
-          "Built internal automations in Visual Basic and developed the discipline required in a regulated engineering environment."
-        ]
+          "Helped build a C# system for risk metrics required by the Brazilian Central Bank.",
+          "Optimized SQL queries, procedures and functions, and built internal automations in Visual Basic."
+        ],
+        "stack": ["C#", "SQL", "Visual Basic"],
+        "company": "Itau Unibanco"
       }
     ]
   },
   "skills": [
     {
-      "name": "Backend Engineering",
-      "description": "Core delivery stack for business-critical services and APIs.",
-      "items": ["Java 8-21", "Spring Boot", "REST APIs", "Microservices", "PostgreSQL", "Liquibase", "Flyway", "Asynchronous processing"]
+      "name": "Backend & data",
+      "description": "My primary implementation stack across banking and fintech.",
+      "items": [
+        "Java 8-21",
+        "Spring Boot",
+        "REST APIs",
+        "PostgreSQL",
+        "Oracle / PL/SQL",
+        "Liquibase",
+        "Maven"
+      ]
     },
     {
-      "name": "AWS and Platform",
-      "description": "Cloud and delivery tooling used in real production environments.",
-      "items": ["AWS", "EC2", "Fargate", "Lambda", "DynamoDB", "CloudFormation", "CodePipeline", "Kubernetes", "Docker", "OpenShift"]
+      "name": "Distributed systems",
+      "description": "Keeping state and integrations understandable across service boundaries.",
+      "items": [
+        "Kafka",
+        "AWS SQS / SNS",
+        "Idempotency",
+        "Webhooks",
+        "Outbox pattern",
+        "Reconciliation",
+        "Fault tolerance"
+      ]
     },
     {
-      "name": "Architecture and Distributed Systems",
-      "description": "Design capability that spans service boundaries, failure handling, and long-term maintainability.",
-      "items": ["System design", "Distributed systems", "API design", "DDD", "Hexagonal architecture", "Observability", "Resilience", "Migration planning"]
+      "name": "Cloud & delivery",
+      "description": "Infrastructure, deployments and production troubleshooting.",
+      "items": [
+        "AWS",
+        "EKS / ECR",
+        "IAM",
+        "CloudFormation",
+        "CodePipeline",
+        "Docker",
+        "Kubernetes",
+        "Jenkins"
+      ]
     },
     {
-      "name": "Payments and Financial Systems",
-      "description": "Domain strengths shaped by banking, payment products, and provider-heavy fintech work.",
-      "items": ["Banking integrations", "Card providers", "Crypto providers", "Regulatory reporting", "Financial consistency", "Partner APIs", "Reconciliation thinking", "Risk-aware delivery"]
+      "name": "Engineering quality",
+      "description": "Tests and operational evidence that support safer changes.",
+      "items": [
+        "JUnit",
+        "Mockito",
+        "Spring Test",
+        "Integration testing",
+        "Observability",
+        "Code review",
+        "Migration planning"
+      ]
     },
     {
-      "name": "Leadership and Delivery",
-      "description": "Hands-on senior execution combined with architecture and team guidance.",
-      "items": ["Technical execution", "Architecture reviews", "Mentorship", "Cross-functional communication", "Risk management", "Agile / SCRUM", "Code review", "Pragmatic decision-making"]
+      "name": "Technical leadership",
+      "description": "Practical direction that helps teams deliver independently.",
+      "items": [
+        "System design",
+        "Architecture reviews",
+        "Service ownership",
+        "Mentoring",
+        "Delivery planning",
+        "Cross-functional collaboration"
+      ]
+    },
+    {
+      "name": "Additional experience",
+      "description": "Recent platform and SDK work alongside my Java specialization.",
+      "items": [
+        "TypeScript",
+        "Node.js",
+        "Checkout SDKs",
+        "Developer tooling",
+        "RAG / pgvector",
+        "GitHub automation"
+      ]
     }
   ],
   "contact": {
-    "heading": "Open to Senior Backend Engineer and Tech Lead opportunities in Canada, especially fintech, platform, and distributed systems roles.",
-    "summary": "If you are hiring for Java, Spring Boot, AWS modernization, payments infrastructure, or backend platform work, Bruno is especially interested in roles where technical depth and delivery leadership both matter.",
-    "responseNote": "The contact form opens a pre-filled email draft so outreach works immediately without needing a third-party form provider.",
-    "locations": ["Langley, BC", "Vancouver", "Toronto", "Remote across Canada"]
-  }
+    "heading": "Let's talk about your team.",
+    "summary": "I'm interested in senior backend and Tech Lead roles across fintech, payments, SaaS and platform engineering in Canada.",
+    "responseNote": "A role description, a little context about the team, and the problem you're working on are a good place to start.",
+    "locations": ["Canada", "Remote opportunities", "Greater Vancouver"]
+  },
+  "updatedAt": "2026-09-08"
 }
-
-
-

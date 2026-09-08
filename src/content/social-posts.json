@@ -1,5 +1,26 @@
 [
   {
+    "slug": "release-readiness-beyond-a-green-pipeline",
+    "title": "A green pipeline is not a release decision",
+    "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500169735352012801",
+    "height": 777,
+    "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7500945643000041474/"
+  },
+  {
+    "slug": "multi-region-reliability",
+    "title": "Multi-Region is not the same as resilient",
+    "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:share:7492577403748249600",
+    "height": 1091,
+    "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7493697909981532160/"
+  },
+  {
+    "slug": "sqs-and-failure-isolation",
+    "title": "Distributed systems: isolate failure",
+    "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:share:7487527876376961024",
+    "height": 1167,
+    "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488262118555664384/"
+  },
+  {
     "slug": "linkedin-share-7443171348014886912",
     "title": "Featured LinkedIn Post",
     "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:share:7443171348014886912",

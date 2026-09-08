@@ -5,11 +5,12 @@ node_modules
 dist
 coverage
 *.log
-.env
-.env.local
-.env.*.local
+.env*
+!.env.example
 pnpm-lock.yaml
 yarn.lock
-package-lock.json
+*.tsbuildinfo
+test-results/
+HANDOFF.md
 dev-server.pid
 next-start.pid

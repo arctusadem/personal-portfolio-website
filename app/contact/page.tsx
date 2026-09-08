@@ -1,88 +1,82 @@
-import { Clock3, MailOpen, MessageSquareText } from "lucide-react";
-
-import { Reveal } from "@/components/motion/reveal";
-import { ContactForm } from "@/components/sections/contact-form";
-import { ContactSurfaces } from "@/components/sections/content-cards";
-import { Container, PageIntro, SectionHeading, Surface } from "@/components/ui/primitives";
-import { siteContent } from "@/lib/content";
+import { ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { ContactForm, CopyEmail } from "@/components/sections/contact-form";
+import { Container, PageIntro } from "@/components/ui/primitives";
+import { siteContent, profile } from "@/lib/profile";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact Bruno Salgado about Senior Backend Engineer and Tech Lead opportunities in fintech, platform engineering, and distributed systems.",
+    "Contact Bruno Salgado about Senior Backend Engineer and Tech Lead opportunities in Canada, especially fintech, payments, SaaS and distributed systems.",
   path: "/contact",
-  keywords: ["Contact Bruno Salgado", "Backend engineer contact", "Tech lead contact"],
 });
-
 export default function ContactPage() {
   return (
-    <div className="py-16 sm:py-20">
-      <Container className="space-y-16">
-        <Reveal>
-          <PageIntro
-            eyebrow="Contact"
-            title={siteContent.contact.heading}
-            description={siteContent.contact.summary}
-            aside={
-              <Surface className="p-6">
-                <div className="space-y-4 text-sm leading-7 text-[var(--muted)]">
-                  <div className="flex items-center gap-3 text-[var(--foreground)]">
-                    <Clock3 className="size-5 text-[var(--accent)]" />
-                    <p className="font-semibold">How outreach works</p>
-                  </div>
-                  <p>{siteContent.contact.responseNote}</p>
-                </div>
-              </Surface>
-            }
-          />
-        </Reveal>
-
-        <section className="space-y-8">
-          <Reveal>
-            <ContactSurfaces
-              email={siteContent.profile.email}
-              linkedinUrl={siteContent.profile.linkedinUrl}
-              locations={siteContent.contact.locations}
-            />
-          </Reveal>
-        </section>
-
-        <section className="grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:items-start">
-          <Reveal className="space-y-8">
-            <SectionHeading
-              eyebrow="Reach Out"
-              title="A short, direct message is enough to start the conversation."
-              description="The best fit is usually clear quickly: Senior Backend Engineer or Tech Lead roles in fintech, platform teams, or distributed systems environments where Java, AWS, payments, and architecture all matter."
-            />
-            <div className="space-y-4">
-              {[
-                {
-                  icon: MessageSquareText,
-                  title: "Best topics",
-                  body: "Senior backend roles, Tech Lead opportunities, fintech platforms, payment systems, AWS modernization, and backend-heavy product teams.",
-                },
-                {
-                  icon: MailOpen,
-                  title: "Useful context",
-                  body: "Team stage, key technical challenges, domain focus, and whether the role leans more hands-on, more leadership-oriented, or both.",
-                },
-              ].map((item) => (
-                <Surface className="p-6" key={item.title}>
-                  <div className="space-y-3">
-                    <item.icon className="size-5 text-[var(--accent)]" />
-                    <h2 className="text-lg font-semibold text-[var(--foreground)]">{item.title}</h2>
-                    <p className="text-sm leading-7 text-[var(--muted)]">{item.body}</p>
-                  </div>
-                </Surface>
-              ))}
+    <Container className="space-y-12 py-12 sm:space-y-16 sm:py-16">
+      <PageIntro
+        eyebrow="Contact"
+        title={siteContent.contact.heading}
+        description={siteContent.contact.summary}
+      />
+      <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <section aria-label="Contact details" className="space-y-7">
+          <div className="rounded-2xl bg-[var(--accent-soft)] p-6">
+            <p className="mb-3 flex items-center gap-2 text-sm font-semibold">
+              <Mail aria-hidden className="size-4 text-[var(--accent)]" /> Email
+              me directly
+            </p>
+            <a
+              className="text-link break-all text-base font-semibold sm:text-lg"
+              href={`mailto:${profile.email}`}
+            >
+              {profile.email}
+            </a>
+            <div className="mt-3">
+              <CopyEmail />
             </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <ContactForm />
-          </Reveal>
+          </div>
+          <p className="max-w-md text-sm leading-7 text-[var(--muted)]">
+            {siteContent.contact.responseNote}
+          </p>
+          <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+            {[
+              {
+                label: "LinkedIn",
+                detail: "Professional background & posts",
+                href: profile.linkedinUrl,
+                Icon: Linkedin,
+              },
+              {
+                label: "GitHub",
+                detail: "Code & engineering studies",
+                href: profile.githubUrl,
+                Icon: Github,
+              },
+            ].map(({ label, detail, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex min-h-20 items-center gap-4 py-4 transition-colors hover:text-[var(--accent)]"
+              >
+                <Icon aria-hidden className="size-5 text-[var(--accent)]" />
+                <span className="flex-1">
+                  <span className="block text-sm font-semibold">{label}</span>
+                  <span className="mt-1 block text-xs text-[var(--muted)]">
+                    {detail}
+                  </span>
+                </span>
+                <ArrowUpRight aria-hidden className="size-4" />
+              </a>
+            ))}
+          </div>
+          <p className="flex items-center gap-2 text-xs text-[var(--muted)]">
+            <MapPin aria-hidden className="size-4" /> {profile.location}
+          </p>
         </section>
-      </Container>
-    </div>
+        <ContactForm />
+      </div>
+    </Container>
   );
 }

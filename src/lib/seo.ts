@@ -1,51 +1,58 @@
 import type { Metadata } from "next";
-
-import { siteContent } from "@/lib/content";
+import { profile } from "@/lib/profile";
 
 export const siteUrl = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL || siteContent.profile.siteUrl,
+  process.env.NEXT_PUBLIC_SITE_URL || profile.siteUrl,
 );
-
-export function absoluteUrl(path = "/") {
-  return new URL(path, siteUrl).toString();
-}
-
-type MetadataInput = {
-  title: string;
-  description: string;
-  path?: string;
-  keywords?: string[];
-};
+export const isPreview = process.env.VERCEL_ENV === "preview";
+export const absoluteUrl = (path = "/") => new URL(path, siteUrl).toString();
 
 export function buildMetadata({
   title,
   description,
   path = "/",
   keywords = [],
-}: MetadataInput): Metadata {
-  const fullTitle = `${title} | ${siteContent.profile.name}`;
-  const url = absoluteUrl(path);
-
+}: {
+  title: string;
+  description: string;
+  path?: string;
+  keywords?: string[];
+}): Metadata {
+  const fullTitle = title.includes(profile.name)
+    ? title
+    : title + " | " + profile.name;
   return {
-    title: fullTitle,
+    title: { absolute: fullTitle },
     description,
-    keywords,
-    alternates: {
-      canonical: url,
-    },
+    keywords: [
+      ...new Set([
+        "Java",
+        "Spring Boot",
+        "AWS",
+        "Payments",
+        "Fintech",
+        "Distributed systems",
+        "Senior Backend Engineer",
+        "Tech Lead",
+        "Canada",
+        ...keywords,
+      ]),
+    ],
+    alternates: { canonical: absoluteUrl(path) },
+    robots: { index: !isPreview, follow: !isPreview },
     openGraph: {
       title: fullTitle,
       description,
       type: "website",
-      url,
-      siteName: siteContent.profile.name,
+      url: absoluteUrl(path),
+      siteName: profile.name,
       locale: "en_CA",
       images: [
         {
           url: absoluteUrl("/opengraph-image"),
           width: 1200,
           height: 630,
-          alt: `${siteContent.profile.name} portfolio preview`,
+          alt: "Bruno Salgado. Tech Lead and Senior Backend Engineer. Java, Spring Boot and AWS.",
         },
       ],
     },

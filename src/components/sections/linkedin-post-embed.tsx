@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowUpRight, Linkedin } from "lucide-react";
 
 import type { SocialPost } from "@/types/content";
@@ -17,22 +15,25 @@ export function LinkedInPostEmbed({ post }: { post: SocialPost }) {
           style={{ minHeight: `${post.height}px` }}
           frameBorder="0"
           allowFullScreen
-          loading="eager"
+          loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-dashed border-[var(--border)] bg-[var(--background)]/70 px-4 py-3 text-sm text-[var(--muted)]">
-        <p>If LinkedIn blocks the live embed in your browser, use the direct post link below.</p>
+        <p>
+          If LinkedIn blocks the live embed in your browser, use the direct post
+          link below.
+        </p>
         <a
           className="inline-flex items-center gap-2 font-semibold text-[var(--foreground)] transition hover:text-[var(--accent)]"
           href={post.sourceUrl}
           target="_blank"
           rel="noreferrer"
         >
-          <Linkedin className="size-4" /> Open on LinkedIn <ArrowUpRight className="size-4" />
+          <Linkedin className="size-4" /> Open on LinkedIn{" "}
+          <ArrowUpRight className="size-4" />
         </a>
       </div>
     </div>
   );
 }
-
