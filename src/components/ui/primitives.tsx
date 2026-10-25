@@ -89,7 +89,7 @@ export function Tag({ children, className }: TagProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)]",
+        "inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-sm font-medium uppercase tracking-[0.18em] text-[var(--muted)]",
         className,
       )}
     >
@@ -196,7 +196,7 @@ export function StatGrid({ items, className }: StatGridProps) {
       {items.map((item) => (
         <Surface className="p-5" key={item.label}>
           <div className="space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
               {item.label}
             </p>
             <p className="text-xl font-semibold text-[var(--foreground)]">

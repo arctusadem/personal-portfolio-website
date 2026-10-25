@@ -62,7 +62,7 @@ export default async function ArticlePage({
         </header>
         <p className="mb-10 rounded-2xl border border-[var(--border)] bg-[var(--accent-soft)] p-5 text-sm leading-7">
           Keyboard shortcuts work outside form fields. Press{" "}
-          <kbd className="rounded border border-[var(--border-strong)] px-1.5 font-mono text-xs">
+          <kbd className="rounded border border-[var(--border-strong)] px-1.5 font-mono text-sm">
             Esc
           </kbd>{" "}
           to dismiss any effect. Reduced-motion preferences are respected.

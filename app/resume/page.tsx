@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ExternalLink, Mail } from "lucide-react";
 import { ResumePrintButton } from "@/components/sections/resume-print-button";
 import { Container } from "@/components/ui/primitives";
@@ -17,10 +18,19 @@ export default function ResumePage() {
         <div>
           <p className="eyebrow">Résumé</p>
           <p className="mt-2 text-sm text-[var(--muted)]">
-            Career summary, ready to print or save as PDF.
+            Download a two-page résumé or print this career summary.
           </p>
         </div>
-        <ResumePrintButton />
+        <div className="flex flex-wrap gap-4">
+          <a
+            className="text-link min-h-11 text-sm"
+            href="/resume/Bruno-Salgado-Resume.pdf"
+            download
+          >
+            Download résumé (PDF)
+          </a>
+          <ResumePrintButton />
+        </div>
       </div>
       <article className="resume-sheet mx-auto max-w-5xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-10">
         <header className="border-b border-[var(--border)] pb-7">
@@ -59,11 +69,7 @@ export default function ResumePage() {
             Profile
           </h2>
           <p className="text-sm leading-7 text-[var(--muted)]">
-            Backend engineer and Tech Lead with 8+ years across Brazilian
-            banking and fintech. Hands-on Java and Spring Boot development,
-            payment-provider integrations, on-premises to AWS modernization, and
-            technical leadership from architecture review through production
-            troubleshooting.
+            {siteContent.resumeSummary}
           </p>
         </section>
         <section className="border-t border-[var(--border)] py-7">
@@ -75,7 +81,7 @@ export default function ResumePage() {
               <section key={role.period} className="resume-role">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
                   <h3 className="text-base font-semibold">{role.title}</h3>
-                  <p className="text-xs text-[var(--muted)]">{role.period}</p>
+                  <p className="text-sm text-[var(--muted)]">{role.period}</p>
                 </div>
                 <p className="mt-1 text-sm text-[var(--accent)]">
                   {role.company} · {role.location}
@@ -106,6 +112,45 @@ export default function ResumePage() {
               </div>
             ))}
           </dl>
+        </section>
+        <section className="mt-7 border-t border-[var(--border)] pt-7">
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-wider">
+            Independent engineering project
+          </h2>
+          <Link
+            className="text-link text-sm"
+            href="/projects/payment-orchestration-platform#java-demo"
+          >
+            Payment orchestration: Java / Spring Boot / PostgreSQL
+          </Link>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            Local Docker demonstration with a provider stub, durable idempotency
+            and concurrent-request tests. Independently built; fictional
+            payments and no employer code.
+          </p>
+        </section>
+        <section className="mt-7 border-t border-[var(--border)] pt-7">
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-wider">
+            Education
+          </h2>
+          <ul className="space-y-4 text-sm leading-6">
+            {siteContent.education.map((item) => (
+              <li key={item.institution}>
+                <p className="font-semibold">
+                  {item.qualification} · {item.institution}
+                </p>
+                <p className="text-[var(--muted)]">{item.period}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className="mt-7 border-t border-[var(--border)] pt-7">
+          <h2 className="mb-3 text-sm font-bold uppercase tracking-wider">
+            Languages
+          </h2>
+          <p className="text-sm leading-6 text-[var(--muted)]">
+            {siteContent.languages.join(" · ")}
+          </p>
         </section>
       </article>
     </Container>

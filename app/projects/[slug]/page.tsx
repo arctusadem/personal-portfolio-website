@@ -45,7 +45,8 @@ export default async function ProjectDetailPage({
     projects[
       (projects.findIndex((p) => p.slug === slug) + 1) % projects.length
     ];
-  const sourceUrl = `${profile.githubUrl}/personal-portfolio-website/tree/dev/projects/${project.directory}`;
+  const sourceUrl = `${profile.githubUrl}/personal-portfolio-website/tree/main/projects/${project.directory}`;
+  const hasJavaSlice = project.directory === "payment-orchestration";
   return (
     <>
       <StructuredData
@@ -81,14 +82,15 @@ export default async function ProjectDetailPage({
           <div className="self-end rounded-2xl border border-[var(--border)] p-6">
             <p className="eyebrow">Scope</p>
             <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-              Architecture proposal, OpenAPI sketch and tested browser model. No
-              production backend or employer data.
+              {hasJavaSlice
+                ? "Independent Java / Spring Boot / PostgreSQL service, architecture proposal and TypeScript browser model. Local fictional payments; no employer code or live payment provider."
+                : "Architecture proposal, OpenAPI sketch and tested browser model. No production backend or employer data."}
             </p>
-            <p className="mt-4 text-xs leading-6">
-              <span className="text-[var(--muted)]">Proposed backend: </span>
+            <p className="mt-4 text-sm leading-6">
+              <span className="text-[var(--muted)]">Architecture stack: </span>
               {project.stack.join(" · ")}
             </p>
-            <p className="mt-2 text-xs text-[var(--muted)]">
+            <p className="mt-2 text-sm text-[var(--muted)]">
               Executable model: TypeScript
             </p>
           </div>
@@ -109,6 +111,63 @@ export default async function ProjectDetailPage({
             </a>
           ))}
         </nav>
+        {hasJavaSlice && (
+          <section
+            id="java-demo"
+            className="mb-12 rounded-3xl border border-[var(--border-strong)] bg-[var(--surface)] p-6 sm:p-8"
+          >
+            <p className="eyebrow">Runnable independent demonstration</p>
+            <h2 className="mt-3 font-serif text-3xl">
+              From browser model to a durable Java slice.
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--muted)]">
+              Java 21, Spring Boot and PostgreSQL implement intent creation, a
+              stable provider attempt, transactional outbox and confirmation
+              inbox. A deterministic stub accepts the fictional payment and
+              loses its response; a later demo confirmation resolves the
+              uncertainty.
+            </p>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7">
+              <li>
+                Merchant-scoped request keys and payload conflict detection
+                enforced with PostgreSQL constraints.
+              </li>
+              <li>
+                Tests race 12 callers and workers, deduplicate confirmation
+                events, and replay a stable attempt after simulated process
+                loss.
+              </li>
+              <li>
+                Docker Compose runs everything locally. The database worker
+                stands in for SQS; the provider stub makes no network calls.
+              </li>
+            </ul>
+            <pre className="code-panel mt-5 text-sm">
+              <code>
+                {
+                  "cd projects/payment-orchestration/java\ndocker compose up --build -d\n# Java 21 + Maven + Docker: run PostgreSQL integration tests\nmvn -B verify"
+                }
+              </code>
+            </pre>
+            <a
+              className="text-link mt-5 min-h-11 text-sm"
+              href={`${sourceUrl}/java`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Github aria-hidden className="size-4" /> Source, curl walkthrough
+              and test instructions{" "}
+              <ArrowUpRight aria-hidden className="size-4" />
+            </a>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--muted)]">
+              This service is separate from the TypeScript model below and from
+              employer production work. The public site does not host the Java
+              backend. Authentication, signature verification, automatic
+              reconciliation and real provider adapters remain outside this
+              local slice.
+            </p>
+          </section>
+        )}
         <section className="grid gap-8 pb-12 md:grid-cols-2 md:gap-12">
           <div>
             <h2 className="font-serif text-2xl">The problem</h2>
@@ -143,7 +202,7 @@ export default async function ProjectDetailPage({
             </p>
           </div>
           <StudyModel kind={project.directory} />
-          <p className="max-w-3xl text-xs leading-6 text-[var(--muted)]">
+          <p className="max-w-3xl text-sm leading-6 text-[var(--muted)]">
             <strong className="font-semibold text-[var(--foreground)]">
               Model limits:{" "}
             </strong>
@@ -173,10 +232,10 @@ export default async function ProjectDetailPage({
           </p>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="code-panel min-w-0 rounded-2xl p-5 sm:p-6">
-              <p className="mb-4 break-words font-mono text-xs text-[var(--accent)]">
+              <p className="mb-4 break-words font-mono text-sm text-[var(--accent)]">
                 {project.endpoint}
               </p>
-              <pre className="text-xs leading-7">
+              <pre className="text-sm leading-7">
                 <code>
                   {project.directory !== "decision-hub"
                     ? "Idempotency-Key: command_demo\n\n"
@@ -186,10 +245,10 @@ export default async function ProjectDetailPage({
               </pre>
             </div>
             <div className="code-panel min-w-0 rounded-2xl p-5 sm:p-6">
-              <p className="mb-4 font-mono text-xs text-[var(--accent)]">
+              <p className="mb-4 font-mono text-sm text-[var(--accent)]">
                 Response
               </p>
-              <pre className="text-xs leading-7">
+              <pre className="text-sm leading-7">
                 <code>{project.response}</code>
               </pre>
             </div>
@@ -207,7 +266,7 @@ export default async function ProjectDetailPage({
                 className="grid gap-4 py-6 first:pt-0 md:grid-cols-[1fr_2fr] md:gap-10"
               >
                 <h3 className="flex gap-3 text-base font-semibold">
-                  <span className="font-mono text-xs leading-7 text-[var(--accent)]">
+                  <span className="font-mono text-sm leading-7 text-[var(--accent)]">
                     0{index + 1}
                   </span>
                   {decision.title}

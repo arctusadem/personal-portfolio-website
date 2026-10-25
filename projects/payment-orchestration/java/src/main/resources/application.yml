@@ -1,0 +1,15 @@
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: 8080
+  error:
+    include-message: never
+spring:
+  datasource:
+    url: ${DEMO_DATABASE_URL:jdbc:postgresql://localhost:55432/payment_demo}
+    username: ${DEMO_DATABASE_USER:demo}
+    password: ${DEMO_DATABASE_PASSWORD:local_demo_only}
+    hikari:
+      maximum-pool-size: 16
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true

@@ -6,7 +6,7 @@ export function StudyDiagram({ project }: { project: Project }) {
     <figure className="diagram-grid rounded-3xl border border-[var(--border)] p-5 sm:p-8">
       <figcaption className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <span className="eyebrow">Proposed system boundaries</span>
-        <span className="font-mono text-xs text-[var(--muted)]">
+        <span className="font-mono text-sm text-[var(--muted)]">
           sync / durable / async
         </span>
       </figcaption>
@@ -14,7 +14,7 @@ export function StudyDiagram({ project }: { project: Project }) {
         {project.flow.map((node, index) => (
           <li key={node.name} className="relative">
             <div className="diagram-node h-full">
-              <p className="mb-3 font-mono text-xs text-[var(--accent)]">
+              <p className="mb-3 font-mono text-sm text-[var(--accent)]">
                 0{index + 1}
               </p>
               <h3 className="font-semibold">{node.name}</h3>
@@ -53,7 +53,7 @@ export function StudyDiagram({ project }: { project: Project }) {
           </p>
         </div>
       </div>
-      <p className="mt-5 text-xs leading-5 text-[var(--muted)]">
+      <p className="mt-5 text-sm leading-5 text-[var(--muted)]">
         Logical boundaries, not a deployed topology. The interactive model below
         covers state transitions only.
       </p>

@@ -49,7 +49,7 @@ export function SiteFooter() {
             </Link>
           </nav>
         </div>
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border)] pt-5 text-xs text-[var(--muted)]">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border)] pt-5 text-sm text-[var(--muted)]">
           <p>
             Copyright {new Date().getFullYear()} {profile.name}
           </p>

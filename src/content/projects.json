@@ -66,9 +66,9 @@
     "endpoint": "POST /v1/payments",
     "request": "{\n  \"amountMinor\": 7500,\n  \"currency\": \"CAD\",\n  \"providerToken\": \"tok_demo\"\n}",
     "response": "202 Accepted\nLocation: /v1/payments/pay_demo\n\n{ \"id\": \"pay_demo\", \"status\": \"awaiting_confirmation\" }",
-    "outcome": "The model keeps the provider attempt count at one when the request is retried, applies a confirmation once, and rejects reuse of an intent with a different amount. Those are tested local invariants, not a production reliability claim.",
+    "outcome": "The TypeScript model illustrates request identity and confirmation deduplication. The independent Java slice exercises those boundaries against real PostgreSQL, including concurrent requests and a simulated crash after stub acceptance. Neither is a production reliability claim.",
     "next": [
-      "Implement PostgreSQL constraints and concurrency tests against a provider stub.",
+      "Extend the PostgreSQL slice with per-provider policies and authenticated merchant boundaries.",
       "Test crash recovery around the outbox relay and webhook inbox.",
       "Define retention, reconciliation SLAs and per-provider retry policies before a real integration."
     ],

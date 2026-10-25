@@ -31,7 +31,7 @@ export function CopyEmail() {
         )}{" "}
         Copy email address
       </button>
-      <p role="status" className="text-xs leading-6 text-[var(--muted)]">
+      <p role="status" className="text-sm leading-6 text-[var(--muted)]">
         {feedback}
       </p>
     </div>
@@ -114,7 +114,7 @@ export function ContactForm() {
           </p>
         </noscript>
         <p
-          className="min-h-6 text-xs leading-6 text-[var(--muted)]"
+          className="min-h-6 text-sm leading-6 text-[var(--muted)]"
           role="status"
         >
           {feedback}

@@ -1,6 +1,6 @@
 # Bruno Salgado | Personal Portfolio
 
-A content-driven portfolio for backend engineering and technical leadership. Built with Next.js App Router, React, TypeScript, Tailwind CSS, Framer Motion and Lucide. The three engineering studies include architecture proposals, scoped API contracts and executable models. They are not employer systems or production backends.
+A content-driven portfolio for backend engineering and technical leadership. Built with Next.js App Router, React, TypeScript, Tailwind CSS, Framer Motion and Lucide. The three independent engineering studies include architecture proposals, scoped API contracts and TypeScript browser models. Payment orchestration also includes a runnable Java / Spring Boot / PostgreSQL slice with Docker and concurrency tests. None is employer code or a production payment service.
 
 ## Local development
 
@@ -61,7 +61,7 @@ To feature another post, use LinkedIn's **Embed this post > Embed full post** op
 
 Use the same verified dates and job titles as the resume and LinkedIn. Do not add unverified performance metrics or describe a proposed service as implemented. Proposed backend stacks and the actual TypeScript models are deliberately labelled separately.
 
-The resume page uses the same career data and supports Print / Save PDF. It is a portfolio career summary, not a replacement for an independently maintained application resume.
+The resume page and direct two-page PDF use the same verified career, education and language data. Print / Save PDF remains available. Regenerate the download with `python scripts/generate_resume.py` (ReportLab), then render and visually check both pages before publishing.
 
 ## Engineering studies
 
@@ -71,7 +71,7 @@ Each folder under `projects/` contains a pure TypeScript model and an extraction
 - Money movement: integer minor units, balanced postings, hold/settle/release/reverse.
 - Architecture decisions: revision checks, role boundaries and retained history.
 
-The JSON API sketches specify the command shown in each study, not a complete service API. Storage, concurrency, actual authentication and provider integrations remain future work, explained on the study pages.
+The JSON API sketches specify the command shown in each study, not a complete service API. The Java payment slice implements PostgreSQL persistence, request concurrency, outbox claims and an inbox against a deterministic provider stub. See `projects/payment-orchestration/java/README.md` for commands, tests and limitations. Authentication and real provider integrations remain future work.
 
 ## Contact and privacy
 

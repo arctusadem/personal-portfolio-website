@@ -1,10 +1,11 @@
 # Payment Orchestration Platform
 
-Architecture study and executable browser model, not an employer system or a deployable backend.
+Independent architecture study with a TypeScript browser model and a runnable [Java / Spring Boot / PostgreSQL slice](java/README.md). Fictional payments; no employer code or production system.
 
 ## Included
 
 - `model.ts`: deterministic, framework-independent transitions.
+- `java/`: local Docker service, Flyway schema and PostgreSQL integration tests for idempotency, concurrency and confirmation handling.
 - `../../public/designs/payment-orchestration.openapi.json`: scoped command contract (OpenAPI 3.0.3), not a complete service specification.
 - `../../tests/models.test.mjs`: invariants and failure cases.
 - `../../src/content/projects.json`: case-study narrative and architecture boundaries.
@@ -15,14 +16,14 @@ From the portfolio root, run `npm test`. The UI at `/projects/payment-orchestrat
 
 ## Limits
 
-Single payment, in-memory TypeScript model. The webhook is assumed verified. No provider calls, persistence, concurrency or signature verification.
+The browser model handles a single payment in memory and assumes a verified webhook. It has no persistence or concurrency. The Java slice separately implements durable storage and concurrency with a provider stub; its README lists its exact boundaries and runnable commands.
 
 ## Extraction
 
-The model has no runtime dependencies or imports from the site. Copy this folder and its API sketch into a new repository, move the matching tests, and choose durable storage and an authenticated API before using it beyond a demonstration. The backend stack shown in the study describes a proposal, not code implemented in this folder.
+The TypeScript model has no runtime dependencies or imports from the site. The Java directory is independently buildable with Maven or Docker; it does not depend on Next.js. The wider SQS and provider-integration architecture remains a proposal beyond that local slice.
 
 ## Next
 
-- Implement PostgreSQL constraints and concurrency tests against a provider stub.
-- Test crash recovery around the outbox relay and webhook inbox.
+- Add authenticated merchant boundaries, real provider contracts and signature verification before any external integration.
+- Expand crash-recovery testing beyond the implemented acceptance/acknowledgement boundary.
 - Define retention, reconciliation SLAs and per-provider retry policies before a real integration.

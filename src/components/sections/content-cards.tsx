@@ -13,27 +13,30 @@ import { ButtonLink, Surface } from "@/components/ui/primitives";
 export function ProjectCard({
   project,
   index = 0,
+  headingLevel = 3,
 }: {
   project: Project;
   index?: number;
+  headingLevel?: 2 | 3;
 }) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   return (
     <article className="group grid overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] transition-colors hover:border-[var(--border-strong)] md:grid-cols-[1.4fr_1fr]">
       <div className="p-6 sm:p-8">
-        <div className="mb-5 flex flex-wrap items-center gap-3 text-xs text-[var(--muted)]">
+        <div className="mb-5 flex flex-wrap items-center gap-3 text-sm text-[var(--muted)]">
           <span className="font-mono text-[var(--accent)]">0{index + 1}</span>
           <span>{project.category}</span>
           <span aria-hidden>/</span>
           <span>Independent study</span>
         </div>
-        <h3 className="font-serif text-2xl leading-tight sm:text-3xl">
+        <Heading className="font-serif text-2xl leading-tight sm:text-3xl">
           <Link
             className="transition-colors hover:text-[var(--accent)]"
             href={`/projects/${project.slug}`}
           >
             {project.title}
           </Link>
-        </h3>
+        </Heading>
         <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--muted)]">
           {project.excerpt}
         </p>
@@ -54,9 +57,11 @@ export function ProjectCard({
         <p className="max-w-sm font-serif text-2xl leading-snug">
           {project.question}
         </p>
-        <p className="mt-6 flex items-center gap-2 text-xs text-[var(--muted)]">
+        <p className="mt-6 flex items-center gap-2 text-sm text-[var(--muted)]">
           <Code2 aria-hidden className="size-4 text-[var(--accent)]" />{" "}
-          Architecture · API sketch · Tested model
+          {project.directory === "payment-orchestration"
+            ? "Java service · PostgreSQL tests · Browser model"
+            : "Architecture · API sketch · Tested model"}
         </p>
       </div>
     </article>
@@ -96,15 +101,16 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
       {items.map((item, index) => (
         <li
           key={item.period}
+          id={`role-${index}`}
           className="grid gap-5 py-8 first:pt-0 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10"
         >
           <div className="space-y-2">
             <p className="text-sm font-medium">{item.period}</p>
-            <p className="text-xs leading-6 text-[var(--muted)]">
+            <p className="text-sm leading-6 text-[var(--muted)]">
               {item.location}
             </p>
             {index === 0 && (
-              <span className="inline-flex rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-xs font-medium text-[var(--accent)]">
+              <span className="inline-flex rounded-full bg-[var(--accent-soft)] px-2.5 py-1 text-sm font-medium text-[var(--accent)]">
                 Current role
               </span>
             )}
@@ -128,7 +134,7 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-xs leading-6 text-[var(--muted)]">
+            <p className="mt-5 text-sm leading-6 text-[var(--muted)]">
               {item.stack.join(" · ")}
             </p>
           </div>
@@ -153,7 +159,7 @@ export function SkillCategoryGrid({
           <ul className="flex flex-wrap gap-2">
             {category.items.map((item) => (
               <li
-                className="rounded-lg border border-[var(--border)] px-2.5 py-1.5 text-xs leading-5"
+                className="rounded-lg border border-[var(--border)] px-2.5 py-1.5 text-sm leading-5"
                 key={item}
               >
                 {item}

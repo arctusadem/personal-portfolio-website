@@ -41,6 +41,13 @@ export type PhilosophyPoint = {
 
 export type SiteContent = {
   updatedAt: string;
+  resumeSummary: string;
+  education: Array<{
+    institution: string;
+    qualification: string;
+    period: string;
+  }>;
+  languages: string[];
   profile: {
     name: string;
     role: string;

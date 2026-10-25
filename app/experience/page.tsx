@@ -16,7 +16,7 @@ export default function ExperiencePage() {
       <PageIntro
         eyebrow="Experience"
         title="Banking foundations. Fintech delivery. Technical leadership."
-        description="8+ years across regulated banking and fintech, progressing from software development to hands-on leadership in payment systems."
+        description="9 years of Java experience across banking and fintech. Selected contributions connect the business context with my hands-on work and technical direction."
         aside={
           <ButtonLink href="/resume" variant="secondary">
             Open résumé
