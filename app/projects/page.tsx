@@ -16,11 +16,16 @@ export default function ProjectsPage() {
       <PageIntro
         eyebrow="Projects"
         title="The decisions behind the system."
-        description="Three independent studies in payments, money movement and technical leadership. Each pairs an architecture proposal with a small executable model. These are not employer projects or deployed backend services."
+        description="Three independent studies in payments, money movement and technical leadership. Payment orchestration includes a runnable Java / Spring Boot / PostgreSQL slice; all three include TypeScript browser models. Built independently, with fictional data."
       />
       <section aria-label="Engineering studies" className="space-y-5">
         {projects.map((project, index) => (
-          <ProjectCard key={project.slug} project={project} index={index} />
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            index={index}
+            headingLevel={2}
+          />
         ))}
       </section>
       <ContactCTA />

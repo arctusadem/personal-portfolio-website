@@ -79,7 +79,7 @@ function Frame({
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
     <div>
-      <dt className="text-xs text-[var(--muted)]">{label}</dt>
+      <dt className="text-sm text-[var(--muted)]">{label}</dt>
       <dd className="mt-2 break-words font-mono text-lg font-semibold">
         {value}
       </dd>
@@ -131,7 +131,7 @@ function PaymentModel() {
           Reuse key, change amount
         </Action>
       </div>
-      <p className="font-mono text-xs leading-6 text-[var(--muted)]">
+      <p className="font-mono text-sm leading-6 text-[var(--muted)]">
         key: checkout-001 / event: evt-001 / currency: CAD
       </p>
     </Frame>
@@ -183,7 +183,7 @@ function LedgerModel() {
         ))}
       </div>
       <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
-        <table className="w-full text-left text-xs">
+        <table className="w-full text-left text-sm">
           <caption className="border-b border-[var(--border)] p-3 text-left font-semibold">
             Append-only journal · illustrative CAD amounts
           </caption>
@@ -211,7 +211,7 @@ function LedgerModel() {
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-[var(--muted)]">
+      <p className="text-sm text-[var(--muted)]">
         Sum of all signed postings:{" "}
         {money(
           state.entries.reduce((sum, entry) => sum + entry.amountMinor, 0),
@@ -275,7 +275,7 @@ function DecisionModel() {
       </div>
       <ol
         aria-label="Decision history"
-        className="space-y-2 border-l-2 border-[var(--accent)] pl-4 font-mono text-xs leading-6 text-[var(--muted)]"
+        className="space-y-2 border-l-2 border-[var(--accent)] pl-4 font-mono text-sm leading-6 text-[var(--muted)]"
       >
         {state.history.map((item) => (
           <li key={item}>{item}</li>

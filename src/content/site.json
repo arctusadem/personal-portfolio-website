@@ -2,7 +2,7 @@
   "profile": {
     "name": "Bruno Salgado",
     "role": "Tech Lead / Senior Backend Engineer",
-    "location": "Greater Vancouver, Canada",
+    "location": "Brazil · Open to remote roles in Canada",
     "email": "brunocrsalgado@gmail.com",
     "siteUrl": "https://brunosalgado.dev",
     "linkedinUrl": "https://www.linkedin.com/in/bruno-cesar-rocha-salgado/",
@@ -34,27 +34,27 @@
     "eyebrow": "Tech Lead & Senior Backend Engineer",
     "headline": "Reliable systems.\nFrom code to production.",
     "subheadline": "Java, Spring Boot and AWS for payments, fintech and distributed systems.",
-    "supportingText": "I'm Bruno. I bring 8+ years of backend engineering across banking and fintech, with hands-on technical leadership from architecture decisions to production troubleshooting.",
-    "availability": "Open to senior backend and Tech Lead opportunities in Canada."
+    "supportingText": "I'm Bruno. I bring 9 years of Java experience across banking and fintech, including Spring Boot payment integrations and hands-on technical leadership.",
+    "availability": "Based in Brazil · Remote preferred · Open to senior backend and Tech Lead roles in Canada."
   },
   "recruiterSignals": [
     {
       "title": "Payment integrations",
-      "body": "Java and Spring Boot services connecting banking, card and crypto providers. Clear contracts, explicit transaction states and careful handling of asynchronous callbacks."
+      "body": "Implemented Java and Spring Boot integrations with Circle, Fireblocks and Ibanera at Cloud Payments, connecting banking, crypto and card workflows."
     },
     {
       "title": "Cloud modernization",
-      "body": "Moving established systems toward AWS and container-based delivery, with attention to migration sequencing, CI/CD and operational continuity."
+      "body": "Contributed to on-premises to AWS modernization at Itau Unibanco, alongside backend services for risk and regulatory workflows."
     },
     {
       "title": "Technical direction",
-      "body": "Architecture reviews, ownership boundaries and delivery planning. I stay close to implementation and help teams resolve risk before it becomes expensive."
+      "body": "At Cloud Payments, review architecture and integration boundaries, align service ownership and work through technical escalations with engineers and external partners."
     }
   ],
   "metrics": [
     {
       "label": "Experience",
-      "value": "8+ years"
+      "value": "9 years of Java"
     },
     {
       "label": "Core stack",
@@ -115,11 +115,11 @@
         "period": "Jan 2025 - Present",
         "title": "Software Engineering Tech Lead",
         "location": "EU / UK initiatives",
-        "summary": "Technical direction and hands-on delivery across payments initiatives, with responsibility for architecture review, integration boundaries and delivery risk.",
+        "summary": "Payment initiatives span multiple services and external partners. My role connects architecture review, integration boundaries and hands-on delivery.",
         "outcomes": [
-          "Align service ownership and implementation sequencing across concurrent initiatives so dependencies are explicit before development starts.",
-          "Review designs for failure handling, data consistency and maintainability, connecting architecture decisions to delivery constraints.",
-          "Work through technical escalations with engineers and external partners, bringing implementation findings back into the design."
+          "Align service ownership and implementation sequencing across concurrent initiatives, making dependencies explicit before development starts.",
+          "Review failure handling and data consistency with engineers, translating architecture decisions into implementation constraints.",
+          "Work through technical escalations with engineers and external partners, feeding implementation findings back into the design."
         ],
         "stack": [
           "Java",
@@ -134,11 +134,11 @@
         "period": "Jul 2022 - Dec 2024",
         "title": "Java Developer",
         "location": "United States",
-        "summary": "Java and Spring Boot APIs for a fintech platform connecting banking, crypto and card providers.",
+        "summary": "A fintech platform needed Java APIs connecting banking, crypto and card providers across financial workflows.",
         "outcomes": [
-          "Implemented provider integrations with Circle, Fireblocks and Ibanera across financial workflows.",
-          "Worked with architects and engineers to identify failure paths and improve error handling around external services.",
-          "Supported reliable releases through automated testing, code review and CI/CD in Kubernetes environments."
+          "Implemented integrations with Circle, Fireblocks and Ibanera using Java and Spring Boot.",
+          "Worked with architects and engineers on external-service failure paths and error handling.",
+          "Supported releases through automated tests, code review and CI/CD in Kubernetes environments."
         ],
         "stack": ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Kubernetes"],
         "company": "Cloud Payments"
@@ -147,10 +147,10 @@
         "period": "Mar 2022 - Jun 2022",
         "title": "Java Spring Developer",
         "location": "United States",
-        "summary": "Backend services for business-banking financial reporting.",
+        "summary": "Business-banking customers needed cash flow statements and financial reporting workflows.",
         "outcomes": [
-          "Built services supporting cash flow statements and reporting workflows for business customers.",
-          "Implemented APIs and asynchronous processing with attention to consistency and correctness of financial output."
+          "Built backend services supporting cash flow statements and business-customer reporting.",
+          "Implemented REST APIs and asynchronous processing for financial reporting, with attention to data consistency."
         ],
         "stack": ["Java", "Spring Boot", "REST APIs", "Financial reporting"],
         "company": "PROFIT Business Bank"
@@ -159,11 +159,11 @@
         "period": "Feb 2019 - Dec 2021",
         "title": "Software Engineer",
         "location": "Brazil",
-        "summary": "Backend services, market-risk tooling and modernization in a regulated banking environment.",
+        "summary": "Risk and regulatory workflows depended on established banking systems while services moved toward AWS.",
         "outcomes": [
-          "Developed backend services and REST APIs supporting risk and regulatory workflows.",
-          "Contributed to on-premises to AWS modernization and supported delivery through cloud and on-premises CI/CD pipelines.",
-          "Worked with Kafka and AWS messaging, SQL and financial reporting systems where traceability and controlled changes mattered."
+          "Developed backend services and REST APIs for risk and regulatory workflows.",
+          "Contributed to on-premises to AWS modernization and supported cloud and on-premises CI/CD pipelines.",
+          "Worked with Kafka, AWS messaging and SQL in financial reporting systems requiring traceable, controlled changes."
         ],
         "stack": ["Java", "AWS", "Kafka", "SQS / SNS", "SQL", "CI/CD"],
         "company": "Itau Unibanco"
@@ -172,10 +172,10 @@
         "period": "Jul 2017 - Jan 2019",
         "title": "Intern",
         "location": "Brazil",
-        "summary": "Software development supporting risk metrics and regulatory reporting.",
+        "summary": "Risk teams needed metrics and regulatory reporting required by the Brazilian Central Bank.",
         "outcomes": [
-          "Helped build a C# system for risk metrics required by the Brazilian Central Bank.",
-          "Optimized SQL queries, procedures and functions, and built internal automations in Visual Basic."
+          "Helped build the C# system supporting those risk metrics.",
+          "Optimized SQL queries, procedures and functions, and built internal Visual Basic automations."
         ],
         "stack": ["C#", "SQL", "Visual Basic"],
         "company": "Itau Unibanco"
@@ -265,7 +265,21 @@
     "heading": "Let's talk about your team.",
     "summary": "I'm interested in senior backend and Tech Lead roles across fintech, payments, SaaS and platform engineering in Canada.",
     "responseNote": "A role description, a little context about the team, and the problem you're working on are a good place to start.",
-    "locations": ["Canada", "Remote opportunities", "Greater Vancouver"]
+    "locations": ["Brazil", "Remote preferred", "Opportunities in Canada"]
   },
-  "updatedAt": "2026-09-08"
+  "updatedAt": "2026-10-25",
+  "resumeSummary": "Backend engineer and Tech Lead with 9 years of Java experience across banking and fintech. Hands-on Java and Spring Boot payment-provider integrations, contributions to on-premises to AWS modernization, and technical leadership from architecture review through production troubleshooting.",
+  "education": [
+    {
+      "institution": "University of Victoria",
+      "qualification": "Diploma in Business Administration",
+      "period": "Jan 2022 - Apr 2024"
+    },
+    {
+      "institution": "Mackenzie Presbyterian University",
+      "qualification": "BSc Computer Science",
+      "period": "Jan 2015 - Dec 2018"
+    }
+  ],
+  "languages": ["Portuguese (native)", "English", "French (currently studying)"]
 }

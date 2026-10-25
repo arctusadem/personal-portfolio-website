@@ -63,7 +63,7 @@ export default function ContactPage() {
                 <Icon aria-hidden className="size-5 text-[var(--accent)]" />
                 <span className="flex-1">
                   <span className="block text-sm font-semibold">{label}</span>
-                  <span className="mt-1 block text-xs text-[var(--muted)]">
+                  <span className="mt-1 block text-sm text-[var(--muted)]">
                     {detail}
                   </span>
                 </span>
@@ -71,7 +71,7 @@ export default function ContactPage() {
               </a>
             ))}
           </div>
-          <p className="flex items-center gap-2 text-xs text-[var(--muted)]">
+          <p className="flex items-center gap-2 text-sm text-[var(--muted)]">
             <MapPin aria-hidden className="size-4" /> {profile.location}
           </p>
         </section>

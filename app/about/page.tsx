@@ -54,7 +54,7 @@ export default function AboutPage() {
         <div className="mt-8 grid gap-8 md:grid-cols-3">
           {siteContent.about.philosophy.map((point, index) => (
             <div key={point.title}>
-              <p className="mb-3 font-mono text-xs text-[var(--accent)]">
+              <p className="mb-3 font-mono text-sm text-[var(--accent)]">
                 0{index + 1}
               </p>
               <h3 className="text-lg font-semibold">{point.title}</h3>

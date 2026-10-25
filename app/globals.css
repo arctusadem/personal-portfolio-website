@@ -81,7 +81,7 @@ main {
   scroll-margin-top: 100px;
 }
 .eyebrow {
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -118,7 +118,7 @@ main {
   border-radius: 0.5rem;
   padding: 0.65rem 0.85rem;
   color: var(--muted);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 .nav-link:hover,

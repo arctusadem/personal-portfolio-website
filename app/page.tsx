@@ -21,7 +21,7 @@ import { absoluteUrl, buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Tech Lead & Senior Backend Engineer",
   description:
-    "Bruno Salgado: 8+ years building Java, Spring Boot and AWS backends for banking, fintech and payments. Technical leadership and distributed systems.",
+    "Bruno Salgado: 9 years of Java experience across banking and fintech. Spring Boot, AWS, payment integrations and hands-on technical leadership.",
   path: "/",
 });
 
@@ -47,12 +47,12 @@ function EngineeringFocus() {
         ].map(([n, title, body], i) => (
           <li key={n}>
             <div className="diagram-node flex gap-4">
-              <span className="pt-1 font-mono text-xs text-[var(--accent)]">
+              <span className="pt-1 font-mono text-sm text-[var(--accent)]">
                 {n}
               </span>
               <div>
                 <p className="text-sm font-semibold">{title}</p>
-                <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                <p className="mt-1 text-sm leading-5 text-[var(--muted)]">
                   {body}
                 </p>
               </div>
@@ -63,7 +63,7 @@ function EngineeringFocus() {
           </li>
         ))}
       </ol>
-      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-[var(--muted)]">
+      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)]">
         {["Traceable", "Recoverable", "Explicit"].map((x) => (
           <span key={x} className="inline-flex items-center gap-1.5">
             <Check aria-hidden className="size-3 text-[var(--accent)]" />
@@ -96,10 +96,10 @@ export default function HomePage() {
           ],
         }}
       />
-      <section className="pb-12 pt-10 sm:pb-16 sm:pt-16 lg:pt-20">
+      <section className="pb-12 pt-10 sm:pb-16 sm:pt-12">
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
-            <Reveal className="min-w-0 space-y-6">
+            <Reveal className="min-w-0 space-y-4">
               <p className="eyebrow">{siteContent.hero.eyebrow}</p>
               <h1 className="hero-title">{siteContent.hero.headline}</h1>
               <div
@@ -112,21 +112,39 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
-              <p className="max-w-lg text-lg leading-7 text-[var(--foreground)]">
-                Payments, fintech and distributed systems.
-              </p>
               <p className="max-w-lg text-sm leading-7 text-[var(--muted)]">
                 {siteContent.hero.supportingText}
               </p>
+              <ul className="max-w-lg space-y-2 text-sm leading-6">
+                <li>
+                  <Link className="text-link" href="/experience#role-1">
+                    Circle, Fireblocks & Ibanera integrations{" "}
+                    <ArrowUpRight aria-hidden className="size-4" />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="text-link"
+                    href="/projects/payment-orchestration-platform#java-demo"
+                  >
+                    Run the independent Java payment slice{" "}
+                    <ArrowUpRight aria-hidden className="size-4" />
+                  </Link>
+                </li>
+              </ul>
               <div className="flex flex-wrap gap-3">
                 <ButtonLink href="/experience">
                   Explore my experience
                 </ButtonLink>
-                <ButtonLink href="/resume" variant="secondary">
-                  View resume
-                </ButtonLink>
+                <a
+                  className="text-link min-h-11 rounded-xl border border-[var(--border-strong)] px-5 text-sm"
+                  href="/resume/Bruno-Salgado-Resume.pdf"
+                  download
+                >
+                  Download résumé (PDF)
+                </a>
               </div>
-              <p className="max-w-md text-xs leading-6 text-[var(--muted)]">
+              <p className="max-w-md text-sm leading-6 text-[var(--muted)]">
                 {siteContent.hero.availability}
               </p>
             </Reveal>
@@ -135,7 +153,7 @@ export default function HomePage() {
             </Reveal>
           </div>
           <div className="mt-12 flex flex-wrap items-center justify-between gap-5 border-t border-[var(--border)] pt-6">
-            <p className="text-xs text-[var(--muted)]">
+            <p className="text-sm text-[var(--muted)]">
               Experience across banking & fintech
             </p>
             <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-semibold sm:text-base">
@@ -143,7 +161,7 @@ export default function HomePage() {
               <span>PROFIT Business Bank</span>
               <span>Cloud Payments</span>
             </div>
-            <a href="#selected-work" className="text-link text-xs">
+            <a href="#selected-work" className="text-link text-sm">
               Selected work
               <ArrowDown aria-hidden className="size-3.5" />
             </a>
@@ -179,7 +197,7 @@ export default function HomePage() {
                   key={item.title}
                   className="grid grid-cols-[2rem_1fr] gap-4 py-6 first:pt-0 last:pb-0"
                 >
-                  <span className="pt-1 font-mono text-xs text-[var(--accent)]">
+                  <span className="pt-1 font-mono text-sm text-[var(--accent)]">
                     0{i + 1}
                   </span>
                   <div>
@@ -204,9 +222,9 @@ export default function HomePage() {
                 A closer look at the decisions.
               </h2>
               <p className="text-sm leading-7 text-[var(--muted)]">
-                Independent architecture studies with interactive models and API
-                contracts. Each explores a specific design problem, its failure
-                cases and its trade-offs.
+                Independent studies with interactive models and API contracts,
+                plus a runnable Java payment slice. Explore the design problems,
+                failure cases and trade-offs.
               </p>
             </div>
             <Link className="text-link text-sm" href="/projects">
